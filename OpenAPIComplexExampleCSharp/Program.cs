@@ -31,7 +31,7 @@ namespace OpenAPIAndADMDemo
                 string MyAppPath = AppDomain.CurrentDomain.BaseDirectory;
                 string templatePath = System.IO.Path.Combine(MyAppPath, @"..\..\..\..\res\OpenAPIEmptyProject.esa");//path to teh empty SCIA Engineer project
                 //SCIA.OpenAPI.EsaProject proj = env.OpenProject(templatePath);
-                SCIA.OpenAPI.EsaProject proj = env.OpenProject(@"C:\WORK\SourceCodes\OpenAPIComplexExampleCSharp\res\OpenAPIEmptyProject.esa");
+                SCIA.OpenAPI.EsaProject proj = env.OpenProject(templatePath);
                 if (proj == null){
                     return;
                 }
