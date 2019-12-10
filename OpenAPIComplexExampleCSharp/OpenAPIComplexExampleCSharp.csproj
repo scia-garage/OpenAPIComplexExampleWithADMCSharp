@@ -53,171 +53,59 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
-    </Reference>
     <Reference Include="CSInfrastructure, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CSInfrastructure.0.7.0-alpha0073-20190729-141559\lib\netstandard2.0\CSInfrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="EPPlus, Version=4.5.3.1, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
-      <HintPath>..\packages\EPPlus.4.5.3.1\lib\net40\EPPlus.dll</HintPath>
-    </Reference>
-    <Reference Include="FluentValidation, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
-      <HintPath>..\packages\FluentValidation.8.4.0\lib\net45\FluentValidation.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.SignalR.Client, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.SignalR.Client.2.4.0\lib\net45\Microsoft.AspNet.SignalR.Client.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.4.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.4.0\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.4.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Cors, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Cors.4.0.1\lib\net45\Microsoft.Owin.Cors.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Host.HttpListener, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Host.HttpListener.4.0.1\lib\net45\Microsoft.Owin.Host.HttpListener.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Hosting, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Hosting.4.0.1\lib\net45\Microsoft.Owin.Hosting.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\OpenAPI_dll\CSInfrastructure.dll</HintPath>
     </Reference>
     <Reference Include="ModelExchanger.AnalysisDataModel, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ModelExchanger.AnalysisDataModel.0.7.0-alpha0073-20190729-141559\lib\netstandard2.0\ModelExchanger.AnalysisDataModel.dll</HintPath>
-    </Reference>
-    <Reference Include="ModelExchanger.AnalysisDataModel.Contracts, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ModelExchanger.AnalysisDataModel.0.7.0-alpha0073-20190729-141559\lib\netstandard2.0\ModelExchanger.AnalysisDataModel.Contracts.dll</HintPath>
-    </Reference>
-    <Reference Include="ModelExchanger.AnalysisDataModel.DataBuilders, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ModelExchanger.AnalysisDataModel.DataBuilders.0.7.0-alpha0073-20190729-141559\lib\netstandard2.0\ModelExchanger.AnalysisDataModel.DataBuilders.dll</HintPath>
-    </Reference>
-    <Reference Include="ModelExchanger.AnalysisDataModel.Implementation, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ModelExchanger.AnalysisDataModel.0.7.0-alpha0073-20190729-141559\lib\netstandard2.0\ModelExchanger.AnalysisDataModel.Implementation.dll</HintPath>
-    </Reference>
-    <Reference Include="ModelExchanger.AnalysisDataModel.Integration.Bootstrapper, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ModelExchanger.AnalysisDataModel.0.7.0-alpha0073-20190729-141559\lib\netstandard2.0\ModelExchanger.AnalysisDataModel.Integration.Bootstrapper.dll</HintPath>
-    </Reference>
-    <Reference Include="ModelExchanger.Excel.Conversion.Contracts, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ModelExchanger.Excel.0.7.0-alpha0073-20190729-141559\lib\netstandard2.0\ModelExchanger.Excel.Conversion.Contracts.dll</HintPath>
-    </Reference>
-    <Reference Include="ModelExchanger.Excel.Conversion.Implementation, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ModelExchanger.Excel.0.7.0-alpha0073-20190729-141559\lib\netstandard2.0\ModelExchanger.Excel.Conversion.Implementation.dll</HintPath>
-    </Reference>
-    <Reference Include="ModelExchanger.Excel.DataAccess.Contracts, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ModelExchanger.Excel.0.7.0-alpha0073-20190729-141559\lib\netstandard2.0\ModelExchanger.Excel.DataAccess.Contracts.dll</HintPath>
-    </Reference>
-    <Reference Include="ModelExchanger.Excel.DataAccess.Implementation, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ModelExchanger.Excel.0.7.0-alpha0073-20190729-141559\lib\netstandard2.0\ModelExchanger.Excel.DataAccess.Implementation.dll</HintPath>
-    </Reference>
-    <Reference Include="ModelExchanger.Excel.DataAccess.Models, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ModelExchanger.Excel.0.7.0-alpha0073-20190729-141559\lib\netstandard2.0\ModelExchanger.Excel.DataAccess.Models.dll</HintPath>
-    </Reference>
-    <Reference Include="ModelExchanger.Excel.Integration.Bootstrapper, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ModelExchanger.Excel.0.7.0-alpha0073-20190729-141559\lib\netstandard2.0\ModelExchanger.Excel.Integration.Bootstrapper.dll</HintPath>
-    </Reference>
-    <Reference Include="ModelExchanger.Json.Conversion.Contracts, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ModelExchanger.Json.0.7.0-alpha0073-20190729-141559\lib\net461\ModelExchanger.Json.Conversion.Contracts.dll</HintPath>
-    </Reference>
-    <Reference Include="ModelExchanger.Json.Conversion.Implementation, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ModelExchanger.Json.0.7.0-alpha0073-20190729-141559\lib\net461\ModelExchanger.Json.Conversion.Implementation.dll</HintPath>
-    </Reference>
-    <Reference Include="ModelExchanger.Json.Integration.Bootstrapper, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ModelExchanger.Json.0.7.0-alpha0073-20190729-141559\lib\net461\ModelExchanger.Json.Integration.Bootstrapper.dll</HintPath>
-    </Reference>
-    <Reference Include="ModelExchanger.Shared.Implementation, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ModelExchanger.AnalysisDataModel.0.7.0-alpha0073-20190729-141559\lib\netstandard2.0\ModelExchanger.Shared.Implementation.dll</HintPath>
-    </Reference>
-    <Reference Include="ModelExchanger.Shared.Models, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ModelExchanger.AnalysisDataModel.0.7.0-alpha0073-20190729-141559\lib\netstandard2.0\ModelExchanger.Shared.Models.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.5.11\lib\net45\NLog.dll</HintPath>
-    </Reference>
-    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
-      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
-    </Reference>
-    <Reference Include="PresentationCore" />
-    <Reference Include="SCIA.OpenAPI, Version=99.1021.644.32, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files (x86)\SCIA\Engineer19.1\SCIA.OpenAPI.dll</HintPath>
+      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\OpenAPI_dll\ModelExchanger.AnalysisDataModel.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="SciaTools.AdmToAdm.AdmSignalR.Contracts, Version=19.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SciaTools.AdmToAdm.Integration.19.1.2-SciaEngineer-190801-02\lib\net461\SciaTools.AdmToAdm.AdmSignalR.Contracts.dll</HintPath>
+    <Reference Include="ModelExchanger.Shared.Models">
+      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\OpenAPI_dll\ModelExchanger.Shared.Models.dll</HintPath>
+      <Private>False</Private>
     </Reference>
-    <Reference Include="SciaTools.AdmToAdm.AdmSignalR.Implementation, Version=19.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SciaTools.AdmToAdm.Integration.19.1.2-SciaEngineer-190801-02\lib\net461\SciaTools.AdmToAdm.AdmSignalR.Implementation.dll</HintPath>
-    </Reference>
-    <Reference Include="SciaTools.AdmToAdm.AdmSignalR.Integration, Version=19.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SciaTools.AdmToAdm.Integration.19.1.2-SciaEngineer-190801-02\lib\net461\SciaTools.AdmToAdm.AdmSignalR.Integration.dll</HintPath>
+    <Reference Include="PresentationCore" />
+    <Reference Include="SCIA.OpenAPI">
+      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\SCIA.OpenAPI.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="SciaTools.AdmToAdm.AdmSignalR.Models, Version=19.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SciaTools.AdmToAdm.Integration.19.1.2-SciaEngineer-190801-02\lib\net461\SciaTools.AdmToAdm.AdmSignalR.Models.dll</HintPath>
-    </Reference>
-    <Reference Include="SciaTools.AdmToAdm.HubClient, Version=19.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SciaTools.AdmToAdm.Integration.19.1.2-SciaEngineer-190801-02\lib\net461\SciaTools.AdmToAdm.HubClient.exe</HintPath>
-    </Reference>
-    <Reference Include="SciaTools.AdmToAdm.HubServer, Version=19.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SciaTools.AdmToAdm.Integration.19.1.2-SciaEngineer-190801-02\lib\net461\SciaTools.AdmToAdm.HubServer.exe</HintPath>
-    </Reference>
-    <Reference Include="SciaTools.AdmToAdm.Integration.HubClientTest, Version=19.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SciaTools.AdmToAdm.Integration.19.1.2-SciaEngineer-190801-02\lib\net461\SciaTools.AdmToAdm.Integration.HubClientTest.exe</HintPath>
-    </Reference>
-    <Reference Include="SciaTools.AdmToAdm.Integration.Implementation, Version=19.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SciaTools.AdmToAdm.Integration.19.1.2-SciaEngineer-190801-02\lib\net461\SciaTools.AdmToAdm.Integration.Implementation.dll</HintPath>
-    </Reference>
-    <Reference Include="SciaTools.AdmToAdm.Integration.Models, Version=19.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SciaTools.AdmToAdm.Integration.19.1.2-SciaEngineer-190801-02\lib\net461\SciaTools.AdmToAdm.Integration.Models.dll</HintPath>
-    </Reference>
-    <Reference Include="SciaTools.Kernel.Common.Contracts, Version=19.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SciaTools.AdmToAdm.Integration.19.1.2-SciaEngineer-190801-02\lib\net461\SciaTools.Kernel.Common.Contracts.dll</HintPath>
-    </Reference>
-    <Reference Include="SciaTools.Kernel.Common.Implementation, Version=19.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SciaTools.AdmToAdm.Integration.19.1.2-SciaEngineer-190801-02\lib\net461\SciaTools.Kernel.Common.Implementation.dll</HintPath>
-    </Reference>
-    <Reference Include="SciaTools.Kernel.Common.Integration, Version=19.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SciaTools.AdmToAdm.Integration.19.1.2-SciaEngineer-190801-02\lib\net461\SciaTools.Kernel.Common.Integration.dll</HintPath>
-    </Reference>
-    <Reference Include="SciaTools.Kernel.Common.Models, Version=19.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SciaTools.AdmToAdm.Integration.19.1.2-SciaEngineer-190801-02\lib\net461\SciaTools.Kernel.Common.Models.dll</HintPath>
-    </Reference>
-    <Reference Include="SciaTools.Kernel.ModelExchangerExtension.Contracts, Version=19.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SciaTools.AdmToAdm.Integration.19.1.2-SciaEngineer-190801-02\lib\net461\SciaTools.Kernel.ModelExchangerExtension.Contracts.dll</HintPath>
-    </Reference>
-    <Reference Include="SciaTools.Kernel.ModelExchangerExtension.Implementation, Version=19.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SciaTools.AdmToAdm.Integration.19.1.2-SciaEngineer-190801-02\lib\net461\SciaTools.Kernel.ModelExchangerExtension.Implementation.dll</HintPath>
-    </Reference>
-    <Reference Include="SciaTools.Kernel.ModelExchangerExtension.Integration, Version=19.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SciaTools.AdmToAdm.Integration.19.1.2-SciaEngineer-190801-02\lib\net461\SciaTools.Kernel.ModelExchangerExtension.Integration.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\OpenAPI_dll\SciaTools.AdmToAdm.AdmSignalR.Models.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="SciaTools.Kernel.ModelExchangerExtension.Models, Version=19.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SciaTools.AdmToAdm.Integration.19.1.2-SciaEngineer-190801-02\lib\net461\SciaTools.Kernel.ModelExchangerExtension.Models.dll</HintPath>
-    </Reference>
-    <Reference Include="SimpleInjector, Version=4.4.2.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleInjector.4.4.2\lib\net45\SimpleInjector.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\OpenAPI_dll\SciaTools.Kernel.ModelExchangerExtension.Models.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Annotations, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ComponentModel.Annotations.4.4.1\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
-    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.ComponentModel.Primitives, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ComponentModel.Primitives.4.3.0\lib\net45\System.ComponentModel.Primitives.dll</HintPath>
-    </Reference>
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -228,17 +116,15 @@
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Cors, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Cors.5.0.0\lib\net45\System.Web.Cors.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="UnitsNet, Version=3.109.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UnitsNet.3.109.0\lib\net40\UnitsNet.dll</HintPath>
+    <Reference Include="UnitsNet">
+      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\OpenAPI_dll\UnitsNet.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -247,14 +133,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Scripts\jquery-1.6.4-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.6.4.js" />
-    <Content Include="Scripts\jquery-1.6.4.min.js" />
-    <Content Include="Scripts\jquery.signalR-2.4.0.js" />
-    <Content Include="Scripts\jquery.signalR-2.4.0.min.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
