@@ -14,6 +14,7 @@ using Results64Enums;
 using System.IO;
 using System.Reflection;
 using SCIA.OpenAPI.Utils;
+using SCIA.OpenAPI;
 
 namespace OpenAPIAndADMDemo
 {
@@ -48,8 +49,8 @@ namespace OpenAPIAndADMDemo
         {
             //Open project in SCIA Engineer on specified path
             string MyAppPath = AppDomain.CurrentDomain.BaseDirectory;
-            return Path.Combine(MyAppPath, @"..\..\..\..\res\OpenAPIEmptyProject.esa");//path to teh empty SCIA Engineer project
-
+            //return Path.Combine(MyAppPath, @"..\..\..\..\res\OpenAPIEmptyProject.esa");//path to teh empty SCIA Engineer project
+            return @"C:\WORK\SourceCodes\OpenAPIComplexExampleWithADMCSharp\res\OpenAPIEmptyProject.esa";
         }
 
         static private string AppLogPath => GetThisAppLogPath();
@@ -1368,21 +1369,23 @@ namespace OpenAPIAndADMDemo
                 beamB1InnerForLc.Result = resultsApi.LoadResult(beamB1InnerForLc.ResultKey);
                 storage.SetResult(beamB1InnerForLc);
             }
-            OpenApiE2EResult beamInnerForcesCombi = new OpenApiE2EResult("beamInnerForcesCombi")
             {
-                ResultKey = new ResultKey
+               OpenApiE2EResult beamInnerForcesCombi = new OpenApiE2EResult("beamInnerForcesCombi")
                 {
-                    EntityType = eDsElementType.eDsElementType_Beam,
-                    EntityName = B1.Name,
-                    CaseType = eDsElementType.eDsElementType_Combination,
-                    CaseId = C1.Id,
-                    Dimension = eDimension.eDim_1D,
-                    ResultType = eResultType.eFemBeamInnerForces,
-                    CoordSystem = eCoordSystem.eCoordSys_Local
-                }
-            };
-            beamInnerForcesCombi.Result = resultsApi.LoadResult(beamInnerForcesCombi.ResultKey);
-            storage.SetResult(beamInnerForcesCombi);
+                   ResultKey = new ResultKey
+                   {
+                        EntityType = eDsElementType.eDsElementType_Beam,
+                        EntityName = B1.Name,
+                        CaseType = eDsElementType.eDsElementType_Combination,
+                        CaseId = C1.Id,
+                        Dimension = eDimension.eDim_1D,
+                        ResultType = eResultType.eFemBeamInnerForces,
+                        CoordSystem = eCoordSystem.eCoordSys_Local
+                   }
+                };
+                beamInnerForcesCombi.Result = resultsApi.LoadResult(beamInnerForcesCombi.ResultKey);
+                storage.SetResult(beamInnerForcesCombi);
+            }
             {
                 OpenApiE2EResult slabInnerForces = new OpenApiE2EResult("slabInnerForces")
                 {
@@ -1434,7 +1437,7 @@ namespace OpenAPIAndADMDemo
                 reactions.Result = resultsApi.LoadResult(reactions.ResultKey);
                 storage.SetResult(reactions);
             }
-            proj.CloseProject(SCIA.OpenAPI.SaveMode.SaveChangesNo);
+           // proj.CloseProject(SCIA.OpenAPI.SaveMode.SaveChangesNo);
             return storage;
         }
 
@@ -1464,46 +1467,37 @@ namespace OpenAPIAndADMDemo
            //RunSCIAOpenAPI();
            SciaOpenApiContext Context = new SciaOpenApiContext(SciaEngineerFullPath, SciaOpenApiWorker);//to use this construct you need to have a program exe in SCIA ENG. exe folder
            SciaOpenApiUtils.RunSciaOpenApi(Context);
-           OpenApiE2EResults data =  Context.Data as OpenApiE2EResults;
             if (Context.Exception != null)
             {
                 Console.WriteLine(Context.Exception.Message);
                 return;
             }
-            if (data == null)
+            if (!(Context.Data is OpenApiE2EResults data))
             {
                 Console.WriteLine("SOMETHING IS WRONG NO Results DATA !");
                 return;
             }
-            //TextBlockOpenApi.Text = "RESULTS";
             foreach (var item in data.GetAll())
             {
-               // TextBlockOpenApi.Text += item.Value.Result.GetTextOutput();
-
+                Console.WriteLine(item.Value.Result.GetTextOutput());
             }
-            //var data = Context.Data
-            //    Def2Ds1 = resultsApi.LoadResult(keyDef2Ds1);
-            //    if (Def2Ds1 != null)
-            //    {
-            //        Console.WriteLine(Def2Ds1.GetTextOutput());
+            var slabDef = data.GetResult("slabDeformations").Result;
+            if (slabDef != null) {
+                double maxvalue = 0;
+                double pivot;
+                for (int i = 0; i < slabDef.GetMeshElementCount(); i++)
+                {
+                    pivot = slabDef.GetValue(2, i);
+                    if (System.Math.Abs(pivot) > System.Math.Abs(maxvalue))
+                    {
+                        maxvalue = pivot;
 
-            //        double maxvalue = 0;
-            //        double pivot;
-            //        for (int i = 0; i < Def2Ds1.GetMeshElementCount(); i++)
-            //        {
-            //            pivot = Def2Ds1.GetValue(2, i);
-            //            if (System.Math.Abs(pivot) > System.Math.Abs(maxvalue))
-            //            {
-            //                maxvalue = pivot;
-
-            //            }
-            //        }
-            //        Console.WriteLine("Maximum deformation on slab:");
-            //        Console.WriteLine(maxvalue);
-            //    }
-
-            //}
-            Console.WriteLine($"Press key to exit");
+                    }
+                }
+                Console.WriteLine("Maximum deformation on slab:");
+                Console.WriteLine(maxvalue);
+            }
+        Console.WriteLine($"Press key to exit");
         Console.ReadKey();
         }
     }
