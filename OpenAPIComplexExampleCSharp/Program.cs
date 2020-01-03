@@ -14,7 +14,22 @@ using Results64Enums;
 using System.IO;
 using System.Reflection;
 using SCIA.OpenAPI.Utils;
-using SCIA.OpenAPI;
+
+using ModelExchanger.AnalysisDataModel.Models;
+using SciaTools.AdmToAdm.AdmSignalR.Models.Client;
+
+using SciaTools.Kernel.Common.Implementation.App;
+
+using SciaTools.Kernel.ModelExchangerExtension.Contracts.Services;
+using SciaTools.Kernel.ModelExchangerExtension.Integration.Modules;
+using SciaTools.AdmToAdm.AdmSignalR.Contracts.Services;
+using SciaTools.AdmToAdm.AdmSignalR.Integration.Modules;
+using ModelExchanger.AnalysisDataModel.Contracts;
+using ModelExchanger.AnalysisDataModel.Implementation;
+using SciaTools.AdmToAdm.AdmSignalR.Contracts.AnalysisModelModification;
+using SciaTools.Kernel.ModelExchangerExtension.Contracts.AnalysisModelModifications;
+using ModelExchanger.AnalysisDataModel.Integration.Bootstrapper;
+using SciaTools.Kernel.ModelExchangerExtension.Models.AnalysisModelModifications;
 
 namespace OpenAPIAndADMDemo
 {
@@ -751,6 +766,8 @@ namespace OpenAPIAndADMDemo
         }
         static private object SciaOpenApiWorker(SCIA.OpenAPI.Environment env)
         {
+           
+
             //Run SCIA Engineer application
             bool openedSE = env.RunSCIAEngineer(SCIA.OpenAPI.Environment.GuiMode.ShowWindowShow);
             if (!openedSE)
@@ -773,6 +790,7 @@ namespace OpenAPIAndADMDemo
             }
             Console.WriteLine($"Proj opened");
 
+                  
 
             // info about Project 
             ProjectInformation projectInformation = new ProjectInformation(Guid.NewGuid(), "ProjectX")
@@ -783,6 +801,8 @@ namespace OpenAPIAndADMDemo
                 Status = "Draft",
                 ProjectType = "New construction"
             };
+
+            
 
             // info about Model ModelExchanger.AnalysisDataModel.ModelInformation
             ModelInformation modelInformation = new ModelInformation(Guid.NewGuid(), "ModelOne")
@@ -808,7 +828,7 @@ namespace OpenAPIAndADMDemo
             string steelMatGrade = Console.ReadLine();
             StructuralMaterial steel = new StructuralMaterial(Guid.NewGuid(), "Steel", MaterialType.Steel, steelMatGrade);
             ResultOfPartialAddToAnalysisModel addResult = proj.Model.CreateAdmObject(concrete, steel);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
            
             Console.WriteLine($"Materials created in ADM");
 
@@ -819,7 +839,7 @@ namespace OpenAPIAndADMDemo
             StructuralCrossSection steelprofile = new StructuralManufacturedCrossSection(Guid.NewGuid(), steelProfile, steel, steelProfile, FormCode.ISection, DescriptionId.EuropeanIBeam);
 
             addResult = proj.Model.CreateAdmObject(steelprofile);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
 
             Console.WriteLine($"Set height of concrete rectangle in mm: ");
             double heigth = Convert.ToDouble(Console.ReadLine());
@@ -827,7 +847,7 @@ namespace OpenAPIAndADMDemo
             double width = Convert.ToDouble(Console.ReadLine());
             StructuralCrossSection concreteRectangle = new StructuralParametricCrossSection(Guid.NewGuid(), "Concrete", concrete, ProfileLibraryId.Rectangle, new UnitsNet.Length[2] { UnitsNet.Length.FromMillimeters(heigth), UnitsNet.Length.FromMillimeters(width) });
             addResult = proj.Model.CreateAdmObject(concreteRectangle);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
             Console.WriteLine($"CSSs created in ADM");
 
             Console.WriteLine($"Set parameter a: ");
@@ -840,28 +860,28 @@ namespace OpenAPIAndADMDemo
 
             StructuralPointConnection N1 = new StructuralPointConnection(Guid.NewGuid(), "N1", UnitsNet.Length.FromMeters(0), UnitsNet.Length.FromMeters(0), UnitsNet.Length.FromMeters(0));
             addResult = proj.Model.CreateAdmObject(N1);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
             StructuralPointConnection N2 = new StructuralPointConnection(Guid.NewGuid(), "N2", UnitsNet.Length.FromMeters(a), UnitsNet.Length.FromMeters(0), UnitsNet.Length.FromMeters(0));
             addResult = proj.Model.CreateAdmObject(N2);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
             StructuralPointConnection N3 = new StructuralPointConnection(Guid.NewGuid(), "N3", UnitsNet.Length.FromMeters(a), UnitsNet.Length.FromMeters(b), UnitsNet.Length.FromMeters(0));
             addResult = proj.Model.CreateAdmObject(N3);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
             StructuralPointConnection N4 = new StructuralPointConnection(Guid.NewGuid(), "N4", UnitsNet.Length.FromMeters(0), UnitsNet.Length.FromMeters(b), UnitsNet.Length.FromMeters(0));
             addResult = proj.Model.CreateAdmObject(N4);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
             StructuralPointConnection N5 = new StructuralPointConnection(Guid.NewGuid(), "N5", UnitsNet.Length.FromMeters(0), UnitsNet.Length.FromMeters(0), UnitsNet.Length.FromMeters(c));
             addResult = proj.Model.CreateAdmObject(N5);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
             StructuralPointConnection N6 = new StructuralPointConnection(Guid.NewGuid(), "N6", UnitsNet.Length.FromMeters(a), UnitsNet.Length.FromMeters(0), UnitsNet.Length.FromMeters(c));
             addResult = proj.Model.CreateAdmObject(N6);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
             StructuralPointConnection N7 = new StructuralPointConnection(Guid.NewGuid(), "N7", UnitsNet.Length.FromMeters(a), UnitsNet.Length.FromMeters(b), UnitsNet.Length.FromMeters(c));
             addResult = proj.Model.CreateAdmObject(N7);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
             StructuralPointConnection N8 = new StructuralPointConnection(Guid.NewGuid(), "N8", UnitsNet.Length.FromMeters(0), UnitsNet.Length.FromMeters(b), UnitsNet.Length.FromMeters(c));
             addResult = proj.Model.CreateAdmObject(N8);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
             var beamB1lines = new Curve<StructuralPointConnection>[1] { new Curve<StructuralPointConnection>(CurveGeometricalShape.Line, new StructuralPointConnection[2] { N1, N5 }) };
             StructuralCurveMember B1 = new StructuralCurveMember(Guid.NewGuid(), "B1", beamB1lines, steelprofile)
             {
@@ -873,7 +893,7 @@ namespace OpenAPIAndADMDemo
                 EccentricityEz = UnitsNet.Length.FromMeters(0)
             };
             addResult = proj.Model.CreateAdmObject(B1);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
             var beamB2lines = new Curve<StructuralPointConnection>[1] { new Curve<StructuralPointConnection>(CurveGeometricalShape.Line, new StructuralPointConnection[2] { N2, N6 }) };
             StructuralCurveMember B2 = new StructuralCurveMember(Guid.NewGuid(), "B2", beamB2lines, steelprofile)
             {
@@ -885,7 +905,7 @@ namespace OpenAPIAndADMDemo
                 EccentricityEz = UnitsNet.Length.FromMeters(0)
             };
             addResult = proj.Model.CreateAdmObject(B2);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
             var beamB3lines = new Curve<StructuralPointConnection>[1] { new Curve<StructuralPointConnection>(CurveGeometricalShape.Line, new StructuralPointConnection[2] { N3, N7 }) };
             StructuralCurveMember B3 = new StructuralCurveMember(Guid.NewGuid(), "B3", beamB3lines, steelprofile)
             {
@@ -897,7 +917,7 @@ namespace OpenAPIAndADMDemo
                 EccentricityEz = UnitsNet.Length.FromMeters(0)
             };
             addResult = proj.Model.CreateAdmObject(B3);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
             var beamB4lines = new Curve<StructuralPointConnection>[1] { new Curve<StructuralPointConnection>(CurveGeometricalShape.Line, new StructuralPointConnection[2] { N4, N8 }) };
             StructuralCurveMember B4 = new StructuralCurveMember(Guid.NewGuid(), "B4", beamB4lines, steelprofile)
             {
@@ -909,7 +929,7 @@ namespace OpenAPIAndADMDemo
                 EccentricityEz = UnitsNet.Length.FromMeters(0)
             };
             addResult = proj.Model.CreateAdmObject(B4);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
             var beamB5lines = new Curve<StructuralPointConnection>[1] { new Curve<StructuralPointConnection>(CurveGeometricalShape.Line, new StructuralPointConnection[2] { N5, N6 }) };
             StructuralCurveMember B5 = new StructuralCurveMember(Guid.NewGuid(), "B5", beamB5lines, steelprofile)
             {
@@ -921,7 +941,7 @@ namespace OpenAPIAndADMDemo
                 EccentricityEz = UnitsNet.Length.FromMeters(0)
             };
             addResult = proj.Model.CreateAdmObject(B5);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
             var beamB6lines = new Curve<StructuralPointConnection>[1] { new Curve<StructuralPointConnection>(CurveGeometricalShape.Line, new StructuralPointConnection[2] { N6, N7 }) };
             StructuralCurveMember B6 = new StructuralCurveMember(Guid.NewGuid(), "B6", beamB6lines, steelprofile)
             {
@@ -933,7 +953,7 @@ namespace OpenAPIAndADMDemo
                 EccentricityEz = UnitsNet.Length.FromMeters(0)
             };
             addResult = proj.Model.CreateAdmObject(B6);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
             var beamB7lines = new Curve<StructuralPointConnection>[1] { new Curve<StructuralPointConnection>(CurveGeometricalShape.Line, new StructuralPointConnection[2] { N7, N8 }) };
             StructuralCurveMember B7 = new StructuralCurveMember(Guid.NewGuid(), "B7", beamB7lines, steelprofile)
             {
@@ -945,7 +965,7 @@ namespace OpenAPIAndADMDemo
                 EccentricityEz = UnitsNet.Length.FromMeters(0)
             };
             addResult = proj.Model.CreateAdmObject(B7);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
             var beamB8lines = new Curve<StructuralPointConnection>[1] { new Curve<StructuralPointConnection>(CurveGeometricalShape.Line, new StructuralPointConnection[2] { N8, N5 }) };
             StructuralCurveMember B8 = new StructuralCurveMember(Guid.NewGuid(), "B8", beamB8lines, steelprofile)
             {
@@ -957,7 +977,7 @@ namespace OpenAPIAndADMDemo
                 EccentricityEz = UnitsNet.Length.FromMeters(0)
             };
             addResult = proj.Model.CreateAdmObject(B8);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
             Constraint<UnitsNet.RotationalStiffness?> FreeRotation = new Constraint<UnitsNet.RotationalStiffness?>(ConstraintType.Free, UnitsNet.RotationalStiffness.FromKilonewtonMetersPerRadian(0));
             Constraint<UnitsNet.RotationalStiffness?> FixedRotation = new Constraint<UnitsNet.RotationalStiffness?>(ConstraintType.Rigid, UnitsNet.RotationalStiffness.FromKilonewtonMetersPerRadian(1e+10));
             Constraint<UnitsNet.ForcePerLength?> FixedTranslation = new Constraint<UnitsNet.ForcePerLength?>(ConstraintType.Rigid, UnitsNet.ForcePerLength.FromKilonewtonsPerMeter(1e+10));
@@ -999,7 +1019,7 @@ namespace OpenAPIAndADMDemo
                 TranslationZ = FixedTranslation
             };
             addResult = proj.Model.CreateAdmObject(PS1, PS2, PS3, PS4);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
 
             Console.WriteLine($"Set thickness of the slab: ");
             double thickness = Convert.ToDouble(Console.ReadLine());
@@ -1018,7 +1038,7 @@ namespace OpenAPIAndADMDemo
                 Shape = Member2DShape.Flat
             };
             addResult = proj.Model.CreateAdmObject(S1);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
 
             Console.WriteLine($"Set length of opening in slab  in m: ");
             double lengthOpening = Convert.ToDouble(Console.ReadLine());
@@ -1027,16 +1047,16 @@ namespace OpenAPIAndADMDemo
 
             StructuralPointConnection N9 = new StructuralPointConnection(Guid.NewGuid(), "N9", UnitsNet.Length.FromMeters(0.5 * a - 0.5 * lengthOpening), UnitsNet.Length.FromMeters(0.5 * b - 0.5 * withOpening), UnitsNet.Length.FromMeters(c));
             addResult = proj.Model.CreateAdmObject(N9);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
             StructuralPointConnection N10 = new StructuralPointConnection(Guid.NewGuid(), "N10", UnitsNet.Length.FromMeters(0.5 * a + 0.5 * lengthOpening), UnitsNet.Length.FromMeters(0.5 * b - 0.5 * withOpening), UnitsNet.Length.FromMeters(c));
             addResult = proj.Model.CreateAdmObject(N10);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
             StructuralPointConnection N11 = new StructuralPointConnection(Guid.NewGuid(), "N11", UnitsNet.Length.FromMeters(0.5 * a + 0.5 * lengthOpening), UnitsNet.Length.FromMeters(0.5 * b + 0.5 * withOpening), UnitsNet.Length.FromMeters(c));
             addResult = proj.Model.CreateAdmObject(N11);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
             StructuralPointConnection N12 = new StructuralPointConnection(Guid.NewGuid(), "N12", UnitsNet.Length.FromMeters(0.5 * a - 0.5 * lengthOpening), UnitsNet.Length.FromMeters(0.5 * b + 0.5 * withOpening), UnitsNet.Length.FromMeters(c));
             addResult = proj.Model.CreateAdmObject(N12);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
 
             var openingEdges = new Curve<StructuralPointConnection>[4] {
                     new Curve<StructuralPointConnection>(CurveGeometricalShape.Line, new StructuralPointConnection[2] { N9, N10 }),
@@ -1046,7 +1066,7 @@ namespace OpenAPIAndADMDemo
                 };
             StructuralSurfaceMemberOpening O1S1 = new StructuralSurfaceMemberOpening(Guid.NewGuid(), "O1", S1, openingEdges);
             addResult = proj.Model.CreateAdmObject(O1S1);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
 
 
             var edgecurvesS2 = new Curve<StructuralPointConnection>[4] {
@@ -1064,20 +1084,20 @@ namespace OpenAPIAndADMDemo
                 Shape = Member2DShape.Flat
             };
             addResult = proj.Model.CreateAdmObject(S2);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
 
             StructuralPointConnection N13 = new StructuralPointConnection(Guid.NewGuid(), "N13", UnitsNet.Length.FromMeters(0.5 * a - 0.5 * lengthOpening), UnitsNet.Length.FromMeters(0.5 * b - 0.5 * withOpening), UnitsNet.Length.FromMeters(0));
             addResult = proj.Model.CreateAdmObject(N13);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
             StructuralPointConnection N14 = new StructuralPointConnection(Guid.NewGuid(), "N14", UnitsNet.Length.FromMeters(0.5 * a + 0.5 * lengthOpening), UnitsNet.Length.FromMeters(0.5 * b - 0.5 * withOpening), UnitsNet.Length.FromMeters(0));
             addResult = proj.Model.CreateAdmObject(N14);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
             StructuralPointConnection N15 = new StructuralPointConnection(Guid.NewGuid(), "N15", UnitsNet.Length.FromMeters(0.5 * a + 0.5 * lengthOpening), UnitsNet.Length.FromMeters(0.5 * b + 0.5 * withOpening), UnitsNet.Length.FromMeters(0));
             addResult = proj.Model.CreateAdmObject(N15);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
             StructuralPointConnection N16 = new StructuralPointConnection(Guid.NewGuid(), "N16", UnitsNet.Length.FromMeters(0.5 * a - 0.5 * lengthOpening), UnitsNet.Length.FromMeters(0.5 * b + 0.5 * withOpening), UnitsNet.Length.FromMeters(0));
             addResult = proj.Model.CreateAdmObject(N16);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
 
             var regionEdges = new Curve<StructuralPointConnection>[4] {
                     new Curve<StructuralPointConnection>(CurveGeometricalShape.Line, new StructuralPointConnection[2] { N13, N14 }),
@@ -1092,12 +1112,12 @@ namespace OpenAPIAndADMDemo
                 Alignment = Member2DAlignment.Centre
             };
             addResult = proj.Model.CreateAdmObject(SMR);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
 
             Subsoil subsoil = new Subsoil("Subsoil", UnitsNet.SpecificWeight.FromMeganewtonsPerCubicMeter(80.5), UnitsNet.SpecificWeight.FromMeganewtonsPerCubicMeter(35.5), UnitsNet.SpecificWeight.FromMeganewtonsPerCubicMeter(50), UnitsNet.ForcePerLength.FromMeganewtonsPerMeter(15.5), UnitsNet.ForcePerLength.FromMeganewtonsPerMeter(10.2));
             StructuralSurfaceConnection SS1 = new StructuralSurfaceConnection(Guid.NewGuid(), "SS1", S2, subsoil);
             addResult = proj.Model.CreateAdmObject(SS1);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
 
             var edgecurvesS3 = new Curve<StructuralPointConnection>[4] {
                     new Curve<StructuralPointConnection>(CurveGeometricalShape.Line, new StructuralPointConnection[2] { N3, N4 }),
@@ -1114,7 +1134,7 @@ namespace OpenAPIAndADMDemo
                 Shape = Member2DShape.Flat
             };
             addResult = proj.Model.CreateAdmObject(S3);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
 
             RelConnectsSurfaceEdge LH1 = new RelConnectsSurfaceEdge(Guid.NewGuid(), "LH1", S3, 0)
             {
@@ -1126,7 +1146,7 @@ namespace OpenAPIAndADMDemo
                 RotationX = FreeRotationLine,
             };
             addResult = proj.Model.CreateAdmObject(LH1);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
             RelConnectsSurfaceEdge LH2 = new RelConnectsSurfaceEdge(Guid.NewGuid(), "LH2", S3, 1)
             {
                 StartPointRelative = 0,
@@ -1137,7 +1157,7 @@ namespace OpenAPIAndADMDemo
                 RotationX = FreeRotationLine,
             };
             addResult = proj.Model.CreateAdmObject(LH2);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
             RelConnectsSurfaceEdge LH3 = new RelConnectsSurfaceEdge(Guid.NewGuid(), "LH3", S3, 2)
             {
                 StartPointRelative = 0,
@@ -1148,7 +1168,7 @@ namespace OpenAPIAndADMDemo
                 RotationX = FreeRotationLine,
             };
             addResult = proj.Model.CreateAdmObject(LH3);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
             RelConnectsSurfaceEdge LH4 = new RelConnectsSurfaceEdge(Guid.NewGuid(), "LH4", S3, 3)
             {
                 StartPointRelative = 0,
@@ -1159,7 +1179,7 @@ namespace OpenAPIAndADMDemo
                 RotationX = FreeRotationLine,
             };
             addResult = proj.Model.CreateAdmObject(LH4);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
 
 
             RelConnectsStructuralMember H1 = new RelConnectsStructuralMember(Guid.NewGuid(), "H1", B1)
@@ -1171,7 +1191,7 @@ namespace OpenAPIAndADMDemo
                 RotationX = FreeRotation,
             };
             addResult = proj.Model.CreateAdmObject(H1);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
             RelConnectsStructuralMember H2 = new RelConnectsStructuralMember(Guid.NewGuid(), "H2", B2)
             {
                 Position = Position.End,
@@ -1183,7 +1203,7 @@ namespace OpenAPIAndADMDemo
                 RotationZ = FreeRotation
             };
             addResult = proj.Model.CreateAdmObject(H2);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
             RelConnectsStructuralMember H3 = new RelConnectsStructuralMember(Guid.NewGuid(), "H3", B3)
             {
                 Position = Position.End,
@@ -1195,7 +1215,7 @@ namespace OpenAPIAndADMDemo
                 RotationZ = FreeRotation
             };
             addResult = proj.Model.CreateAdmObject(H3);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
             RelConnectsStructuralMember H4 = new RelConnectsStructuralMember(Guid.NewGuid(), "H4", B4)
             {
                 Position = Position.End,
@@ -1207,11 +1227,11 @@ namespace OpenAPIAndADMDemo
                 RotationZ = FreeRotation
             };
             addResult = proj.Model.CreateAdmObject(H4);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
 
             StructuralPointConnection N17 = new StructuralPointConnection(Guid.NewGuid(), "N17", UnitsNet.Length.FromMeters(-1 * b), UnitsNet.Length.FromMeters(0), UnitsNet.Length.FromMeters(0));
             addResult = proj.Model.CreateAdmObject(N17);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
 
             var beamB9lines = new Curve<StructuralPointConnection>[1] { new Curve<StructuralPointConnection>(CurveGeometricalShape.Line, new StructuralPointConnection[2] { N1, N17 }) };
             StructuralCurveMember B9 = new StructuralCurveMember(Guid.NewGuid(), "B9", beamB9lines, concreteRectangle)
@@ -1224,7 +1244,7 @@ namespace OpenAPIAndADMDemo
                 EccentricityEz = UnitsNet.Length.FromMeters(0)
             };
             addResult = proj.Model.CreateAdmObject(B9);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
 
             StructuralCurveConnection LSB = new StructuralCurveConnection(Guid.NewGuid(), "LSB", B9)
             {
@@ -1234,14 +1254,14 @@ namespace OpenAPIAndADMDemo
                 EndPointRelative = 0.75
             };
             addResult = proj.Model.CreateAdmObject(LSB);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
 
             StructuralLoadGroup LG1 = new StructuralLoadGroup(Guid.NewGuid(), "LG1", LoadGroupType.Variable)
             {
                 Load = new CSInfrastructure.FlexibleEnum<Load>(Load.Domestic)
             };
             addResult = proj.Model.CreateAdmObject(LG1);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
 
             StructuralLoadCase LC1 = new StructuralLoadCase(Guid.NewGuid(), "LC1", ActionType.Variable, LG1, LoadCaseType.Static)
             {
@@ -1249,7 +1269,7 @@ namespace OpenAPIAndADMDemo
                 Specification = Specification.Standard
             };
             addResult = proj.Model.CreateAdmObject(LC1);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
 
             Console.WriteLine($"Set value of line load on  kN/m: ");
             double lineloadValue = Convert.ToDouble(Console.ReadLine());
@@ -1277,7 +1297,7 @@ namespace OpenAPIAndADMDemo
             };
 
             addResult = proj.Model.CreateAdmObject(lineloadB1, lineloadB2, lineloadB3, lineloadB4);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
 
             StructuralCurveAction<CurveStructuralReferenceOnEdge> edgeloadS1E1 = new StructuralCurveAction<CurveStructuralReferenceOnEdge>(Guid.NewGuid(), "edgeLoadS1E1", CurveForceAction.OnEdge, UnitsNet.ForcePerLength.FromKilonewtonsPerMeter(lineloadValue), LC1, new CurveStructuralReferenceOnEdge(S1, 0))
             {
@@ -1297,7 +1317,7 @@ namespace OpenAPIAndADMDemo
             };
 
             addResult = proj.Model.CreateAdmObject(edgeloadS1E1, edgeloadS1E2, edgeloadS1E3, edgeloadS1E4);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
 
 
             StructuralLoadCase LC2 = new StructuralLoadCase(Guid.NewGuid(), "LC2", ActionType.Variable, LG1, LoadCaseType.Static)
@@ -1306,7 +1326,7 @@ namespace OpenAPIAndADMDemo
                 Specification = Specification.Standard
             };
             addResult = proj.Model.CreateAdmObject(LC2);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
 
             Console.WriteLine($"Set value of surface load on the slab in kN/m^2: ");
             double surfaceloadValue = Convert.ToDouble(Console.ReadLine());
@@ -1319,20 +1339,20 @@ namespace OpenAPIAndADMDemo
             };
 
             addResult = proj.Model.CreateAdmObject(sls1);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
             StructuralPointAction<PointStructuralReferenceOnPoint> FP = new StructuralPointAction<PointStructuralReferenceOnPoint>(Guid.NewGuid(), "FP", UnitsNet.Force.FromKilonewtons(150), LC2, PointForceAction.InNode, new PointStructuralReferenceOnPoint(N13))
             {
                 Direction = ActionDirection.Z
             };
             addResult = proj.Model.CreateAdmObject(FP);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
             var Combinations = new StructuralLoadCombinationData[2] { new StructuralLoadCombinationData(LC1, 1.0, 1.5), new StructuralLoadCombinationData(LC2, 1.0, 1.35) };
             StructuralLoadCombination C1 = new StructuralLoadCombination(Guid.NewGuid(), "C1", LoadCaseCombinationCategory.AccordingNationalStandard, Combinations)
             {
                 NationalStandard = LoadCaseCombinationStandard.EnUlsSetC
             };
             addResult = proj.Model.CreateAdmObject(C1);
-            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResul(addResult); }
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
             proj.Model.RefreshModel_ToSCIAEngineer();
 
             Console.WriteLine($"My model sent to SEn");
@@ -1441,7 +1461,7 @@ namespace OpenAPIAndADMDemo
             return storage;
         }
 
-        private static Exception HandleErrorResul(ResultOfPartialAddToAnalysisModel addResult)
+        private static Exception HandleErrorResult(ResultOfPartialAddToAnalysisModel addResult)
         {
             switch (addResult.PartialAddResult.Status)
             {
@@ -1461,44 +1481,106 @@ namespace OpenAPIAndADMDemo
 
         static void Main(string[] args)
         {
-            SciaOpenApiAssemblyResolve();
-            DeleteTemp();
-            
-           //RunSCIAOpenAPI();
-           SciaOpenApiContext Context = new SciaOpenApiContext(SciaEngineerFullPath, SciaOpenApiWorker);//to use this construct you need to have a program exe in SCIA ENG. exe folder
-           SciaOpenApiUtils.RunSciaOpenApi(Context);
-            if (Context.Exception != null)
-            {
-                Console.WriteLine(Context.Exception.Message);
-                return;
-            }
-            if (!(Context.Data is OpenApiE2EResults data))
-            {
-                Console.WriteLine("SOMETHING IS WRONG NO Results DATA !");
-                return;
-            }
-            foreach (var item in data.GetAll())
-            {
-                Console.WriteLine(item.Value.Result.GetTextOutput());
-            }
-            var slabDef = data.GetResult("slabDeformations").Result;
-            if (slabDef != null) {
-                double maxvalue = 0;
-                double pivot;
-                for (int i = 0; i < slabDef.GetMeshElementCount(); i++)
-                {
-                    pivot = slabDef.GetValue(2, i);
-                    if (System.Math.Abs(pivot) > System.Math.Abs(maxvalue))
-                    {
-                        maxvalue = pivot;
+            ExcelTest();
 
-                    }
-                }
-                Console.WriteLine("Maximum deformation on slab:");
-                Console.WriteLine(maxvalue);
-            }
-        Console.WriteLine($"Press key to exit");
-        Console.ReadKey();
+            //SciaOpenApiAssemblyResolve();
+            //DeleteTemp();
+
+            ////RunSCIAOpenAPI();
+            //SciaOpenApiContext Context = new SciaOpenApiContext(SciaEngineerFullPath, SciaOpenApiWorker);//to use this construct you need to have a program exe in SCIA ENG. exe folder
+            //SciaOpenApiUtils.RunSciaOpenApi(Context);
+            //if (Context.Exception != null)
+            //{
+            //    Console.WriteLine(Context.Exception.Message);
+            //    return;
+            //}
+            //if (!(Context.Data is OpenApiE2EResults data))
+            //{
+            //    Console.WriteLine("SOMETHING IS WRONG NO Results DATA !");
+            //    return;
+            //}
+            //foreach (var item in data.GetAll())
+            //{
+            //    Console.WriteLine(item.Value.Result.GetTextOutput());
+            //}
+            //var slabDef = data.GetResult("slabDeformations").Result;
+            //if (slabDef != null)
+            //{
+            //    double maxvalue = 0;
+            //    double pivot;
+            //    for (int i = 0; i < slabDef.GetMeshElementCount(); i++)
+            //    {
+            //        pivot = slabDef.GetValue(2, i);
+            //        if (System.Math.Abs(pivot) > System.Math.Abs(maxvalue))
+            //        {
+            //            maxvalue = pivot;
+
+            //        }
+            //    }
+            //    Console.WriteLine("Maximum deformation on slab:");
+            //    Console.WriteLine(maxvalue);
+            //}
+            //Console.WriteLine($"Press key to exit");
+            //Console.ReadKey();
+        }
+
+        private static void ExcelTest()
+        {
+            //// export to Excel
+            //BootstrapperBase BootstrapperClient = new BootstrapperBase();
+            //BootstrapperClient.Boostrapp<AdmSignalRIntegrationModule>();
+
+            //var Client = BootstrapperClient.Container.Resolve<IAdmSignalRService>();
+
+           
+        // info about Project 
+        ProjectInformation projectInformation = new ProjectInformation(Guid.NewGuid(), "ProjectX")
+            {
+                BuildingType = "SimpleFrame",
+                Location = "39XG+P7 Praha",
+                LastUpdate = DateTime.Today,
+                Status = "Draft",
+                ProjectType = "New construction"
+            };
+
+
+
+            // info about Model ModelExchanger.AnalysisDataModel.ModelInformation
+            ModelInformation modelInformation = new ModelInformation(Guid.NewGuid(), "ModelOne")
+            {
+                Discipline = "Static",
+                Owner = "JB",
+                LevelOfDetail = "200",
+                LastUpdate = DateTime.Today,
+                SourceApplication = "OpenAPI",
+                RevisionNumber = "1",
+                SourceCompany = "SCIA",
+                SystemOfUnits = SystemOfUnits.Metric
+
+            };
+
+           // Client.Modifications.TryAddToModel(projectInformation, modelInformation);
+
+
+            BootstrapperBase bootstrapperADM;
+            bootstrapperADM = new BootstrapperBase();
+            bootstrapperADM.Boostrapp<ModelExchangerExtensionIntegrationModule>();
+            var ModelHolder = bootstrapperADM.Container.Resolve<IAnalysisModelHolder>();
+            PartialAddResult actualResult = ModelHolder.AddToModel(new[] { projectInformation});
+            actualResult = ModelHolder.AddToModel(new[] {modelInformation});
+           
+
+            BootstrapperBase bootstrapperExchanger;
+            bootstrapperExchanger = new BootstrapperBase();
+            bootstrapperExchanger.Boostrapp<ModelExchangerExtensionIntegrationModule>();
+            ExchangeResult result = bootstrapperExchanger.Container.Resolve<ICoreToExcelFileService>().WriteExcel(ModelHolder.AnalysisModel, @"C:/TEMP/A.xls");
+
+         ExchangeCoreResult readedExcelModel =  bootstrapperExchanger.Container.Resolve<IExcelToCoreFileService>().ReadExcel(@"C:/TEMP/A.xls");
+
+          result =  bootstrapperExchanger.Container.Resolve<ICoreToJsonFileService>().WriteJson(ModelHolder.AnalysisModel, @"C:/TEMP/A.json");
+            ExchangeCoreResult readedJsonModel =  bootstrapperExchanger.Container.Resolve<IJsonToCoreFileService>().ReadJson(@"C:/TEMP/A.json");
+
+          
         }
     }
 }
