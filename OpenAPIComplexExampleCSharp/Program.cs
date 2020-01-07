@@ -6,7 +6,6 @@ using ModelExchanger.AnalysisDataModel.Subtypes;
 using ModelExchanger.AnalysisDataModel.StructuralElements;
 using ModelExchanger.AnalysisDataModel.StructuralReferences.Curves;
 using ModelExchanger.AnalysisDataModel.StructuralReferences.Points;
-using SciaTools.AdmToAdm.AdmSignalR.Models.ModelModification;
 using SciaTools.Kernel.ModelExchangerExtension.Models.Exchange;
 using System;
 using SCIA.OpenAPI.Results;
@@ -14,22 +13,13 @@ using Results64Enums;
 using System.IO;
 using System.Reflection;
 using SCIA.OpenAPI.Utils;
-
-using ModelExchanger.AnalysisDataModel.Models;
-using SciaTools.AdmToAdm.AdmSignalR.Models.Client;
-
+using SciaTools.AdmToAdm.AdmSignalR.Models.ModelModification;
+using System.Collections.Generic;
 using SciaTools.Kernel.Common.Implementation.App;
-
-using SciaTools.Kernel.ModelExchangerExtension.Contracts.Services;
 using SciaTools.Kernel.ModelExchangerExtension.Integration.Modules;
-using SciaTools.AdmToAdm.AdmSignalR.Contracts.Services;
-using SciaTools.AdmToAdm.AdmSignalR.Integration.Modules;
-using ModelExchanger.AnalysisDataModel.Contracts;
-using ModelExchanger.AnalysisDataModel.Implementation;
-using SciaTools.AdmToAdm.AdmSignalR.Contracts.AnalysisModelModification;
 using SciaTools.Kernel.ModelExchangerExtension.Contracts.AnalysisModelModifications;
-using ModelExchanger.AnalysisDataModel.Integration.Bootstrapper;
 using SciaTools.Kernel.ModelExchangerExtension.Models.AnalysisModelModifications;
+using SciaTools.Kernel.ModelExchangerExtension.Contracts.Services;
 
 namespace OpenAPIAndADMDemo
 {
@@ -1526,11 +1516,7 @@ namespace OpenAPIAndADMDemo
 
         private static void ExcelTest()
         {
-            //// export to Excel
-            //BootstrapperBase BootstrapperClient = new BootstrapperBase();
-            //BootstrapperClient.Boostrapp<AdmSignalRIntegrationModule>();
-
-            //var Client = BootstrapperClient.Container.Resolve<IAdmSignalRService>();
+            
 
            
         // info about Project 
@@ -1558,16 +1544,17 @@ namespace OpenAPIAndADMDemo
                 SystemOfUnits = SystemOfUnits.Metric
 
             };
-
-           // Client.Modifications.TryAddToModel(projectInformation, modelInformation);
+            var AnalysisObjects = new List<IAnalysisObject>();
+            AnalysisObjects.Add(projectInformation);
+            AnalysisObjects.Add(modelInformation);
 
 
             BootstrapperBase bootstrapperADM;
             bootstrapperADM = new BootstrapperBase();
             bootstrapperADM.Boostrapp<ModelExchangerExtensionIntegrationModule>();
             var ModelHolder = bootstrapperADM.Container.Resolve<IAnalysisModelHolder>();
-            PartialAddResult actualResult = ModelHolder.AddToModel(new[] { projectInformation});
-            actualResult = ModelHolder.AddToModel(new[] {modelInformation});
+            PartialAddResult actualResult = ModelHolder.AddToModel(AnalysisObjects);
+            
            
 
             BootstrapperBase bootstrapperExchanger;
@@ -1575,12 +1562,13 @@ namespace OpenAPIAndADMDemo
             bootstrapperExchanger.Boostrapp<ModelExchangerExtensionIntegrationModule>();
             ExchangeResult result = bootstrapperExchanger.Container.Resolve<ICoreToExcelFileService>().WriteExcel(ModelHolder.AnalysisModel, @"C:/TEMP/A.xls");
 
-         ExchangeCoreResult readedExcelModel =  bootstrapperExchanger.Container.Resolve<IExcelToCoreFileService>().ReadExcel(@"C:/TEMP/A.xls");
+            ExchangeCoreResult readedExcelModel =  bootstrapperExchanger.Container.Resolve<IExcelToCoreFileService>().ReadExcel(@"C:/TEMP/A.xls");
+            //readedExcelModel.Model.IsModelValid
 
-          result =  bootstrapperExchanger.Container.Resolve<ICoreToJsonFileService>().WriteJson(ModelHolder.AnalysisModel, @"C:/TEMP/A.json");
+            result =  bootstrapperExchanger.Container.Resolve<ICoreToJsonFileService>().WriteJson(ModelHolder.AnalysisModel, @"C:/TEMP/A.json");
             ExchangeCoreResult readedJsonModel =  bootstrapperExchanger.Container.Resolve<IJsonToCoreFileService>().ReadJson(@"C:/TEMP/A.json");
 
-          
+        
         }
     }
 }
