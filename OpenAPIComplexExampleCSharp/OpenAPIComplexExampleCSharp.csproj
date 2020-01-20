@@ -55,7 +55,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\</OutputPath>
+    <OutputPath>bin\x64\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
@@ -78,115 +78,67 @@
   <ItemGroup>
     <Reference Include="CSInfrastructure, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\OpenAPI_dll\CSInfrastructure.dll</HintPath>
+      <HintPath>..\..\..\..\Program Files\SCIA\Engineer19.1\OpenAPI_dll\CSInfrastructure.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ModelExchanger.AnalysisDataModel, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\OpenAPI_dll\ModelExchanger.AnalysisDataModel.dll</HintPath>
+      <HintPath>..\..\..\..\Program Files\SCIA\Engineer19.1\OpenAPI_dll\ModelExchanger.AnalysisDataModel.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ModelExchanger.AnalysisDataModel.Contracts, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\OpenAPI_dll\ModelExchanger.AnalysisDataModel.Contracts.dll</HintPath>
+      <HintPath>..\..\..\..\Program Files\SCIA\Engineer19.1\OpenAPI_dll\ModelExchanger.AnalysisDataModel.Contracts.dll</HintPath>
     </Reference>
     <Reference Include="ModelExchanger.AnalysisDataModel.Implementation, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\OpenAPI_dll\ModelExchanger.AnalysisDataModel.Implementation.dll</HintPath>
-    </Reference>
-    <Reference Include="ModelExchanger.AnalysisDataModel.Integration.Bootstrapper, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\OpenAPI_dll\ModelExchanger.AnalysisDataModel.Integration.Bootstrapper.dll</HintPath>
-    </Reference>
-    <Reference Include="ModelExchanger.Excel.Conversion.Contracts, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\OpenAPI_dll\ModelExchanger.Excel.Conversion.Contracts.dll</HintPath>
-    </Reference>
-    <Reference Include="ModelExchanger.Excel.Conversion.Implementation, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\OpenAPI_dll\ModelExchanger.Excel.Conversion.Implementation.dll</HintPath>
-    </Reference>
-    <Reference Include="ModelExchanger.Excel.DataAccess.Contracts, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\OpenAPI_dll\ModelExchanger.Excel.DataAccess.Contracts.dll</HintPath>
-    </Reference>
-    <Reference Include="ModelExchanger.Excel.DataAccess.Implementation, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\OpenAPI_dll\ModelExchanger.Excel.DataAccess.Implementation.dll</HintPath>
-    </Reference>
-    <Reference Include="ModelExchanger.Excel.DataAccess.Models, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\OpenAPI_dll\ModelExchanger.Excel.DataAccess.Models.dll</HintPath>
-    </Reference>
-    <Reference Include="ModelExchanger.Excel.Integration.Bootstrapper, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\OpenAPI_dll\ModelExchanger.Excel.Integration.Bootstrapper.dll</HintPath>
+      <HintPath>..\..\..\..\Program Files\SCIA\Engineer19.1\OpenAPI_dll\ModelExchanger.AnalysisDataModel.Implementation.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="ModelExchanger.Shared.Models">
-      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\OpenAPI_dll\ModelExchanger.Shared.Models.dll</HintPath>
+    <Reference Include="ModelExchanger.Shared.Models, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files\SCIA\Engineer19.1\OpenAPI_dll\ModelExchanger.Shared.Models.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore" />
-    <Reference Include="SCIA.OpenAPI">
-      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\SCIA.OpenAPI.dll</HintPath>
+    <Reference Include="SCIA.OpenAPI, Version=19.1.2010.64, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files\SCIA\Engineer19.1\OpenAPI_dll\SCIA.OpenAPI.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="SciaTools.AdmToAdm.AdmSignalR.Contracts">
-      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\OpenAPI_dll\SciaTools.AdmToAdm.AdmSignalR.Contracts.dll</HintPath>
-    </Reference>
-    <Reference Include="SciaTools.AdmToAdm.AdmSignalR.Implementation">
-      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\OpenAPI_dll\SciaTools.AdmToAdm.AdmSignalR.Implementation.dll</HintPath>
-    </Reference>
-    <Reference Include="SciaTools.AdmToAdm.AdmSignalR.Integration">
-      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\OpenAPI_dll\SciaTools.AdmToAdm.AdmSignalR.Integration.dll</HintPath>
-    </Reference>
-    <Reference Include="SciaTools.AdmToAdm.AdmSignalR.Models, Version=19.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="SciaTools.AdmToAdm.AdmSignalR.Models, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\OpenAPI_dll\SciaTools.AdmToAdm.AdmSignalR.Models.dll</HintPath>
+      <HintPath>..\..\..\..\Program Files\SCIA\Engineer19.1\OpenAPI_dll\SciaTools.AdmToAdm.AdmSignalR.Models.dll</HintPath>
       <Private>False</Private>
-    </Reference>
-    <Reference Include="SciaTools.AdmToAdm.Integration.Implementation">
-      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\OpenAPI_dll\SciaTools.AdmToAdm.Integration.Implementation.dll</HintPath>
-    </Reference>
-    <Reference Include="SciaTools.AdmToAdm.Integration.Models, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\OpenAPI_dll\SciaTools.AdmToAdm.Integration.Models.dll</HintPath>
-    </Reference>
-    <Reference Include="SciaTools.AdmToAdm.Integration.Scia, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\OpenAPI_dll\SciaTools.AdmToAdm.Integration.Scia.dll</HintPath>
     </Reference>
     <Reference Include="SciaTools.Kernel.Common.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\OpenAPI_dll\SciaTools.Kernel.Common.Contracts.dll</HintPath>
+      <HintPath>..\..\..\..\Program Files\SCIA\Engineer19.1\OpenAPI_dll\SciaTools.Kernel.Common.Contracts.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="SciaTools.Kernel.Common.Implementation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\OpenAPI_dll\SciaTools.Kernel.Common.Implementation.dll</HintPath>
-    </Reference>
-    <Reference Include="SciaTools.Kernel.Common.Integration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\OpenAPI_dll\SciaTools.Kernel.Common.Integration.dll</HintPath>
+      <HintPath>..\..\..\..\Program Files\SCIA\Engineer19.1\OpenAPI_dll\SciaTools.Kernel.Common.Implementation.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="SciaTools.Kernel.Common.Models, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\OpenAPI_dll\SciaTools.Kernel.Common.Models.dll</HintPath>
+      <HintPath>..\..\..\..\Program Files\SCIA\Engineer19.1\OpenAPI_dll\SciaTools.Kernel.Common.Models.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="SciaTools.Kernel.ModelExchangerExtension.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\OpenAPI_dll\SciaTools.Kernel.ModelExchangerExtension.Contracts.dll</HintPath>
-    </Reference>
-    <Reference Include="SciaTools.Kernel.ModelExchangerExtension.Implementation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\OpenAPI_dll\SciaTools.Kernel.ModelExchangerExtension.Implementation.dll</HintPath>
+      <HintPath>..\..\..\..\Program Files\SCIA\Engineer19.1\OpenAPI_dll\SciaTools.Kernel.ModelExchangerExtension.Contracts.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="SciaTools.Kernel.ModelExchangerExtension.Integration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\OpenAPI_dll\SciaTools.Kernel.ModelExchangerExtension.Integration.dll</HintPath>
+      <HintPath>..\..\..\..\Program Files\SCIA\Engineer19.1\OpenAPI_dll\SciaTools.Kernel.ModelExchangerExtension.Integration.dll</HintPath>
+      <Private>False</Private>
     </Reference>
-    <Reference Include="SciaTools.Kernel.ModelExchangerExtension.Models, Version=19.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="SciaTools.Kernel.ModelExchangerExtension.Models, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\OpenAPI_dll\SciaTools.Kernel.ModelExchangerExtension.Models.dll</HintPath>
+      <HintPath>..\..\..\..\Program Files\SCIA\Engineer19.1\OpenAPI_dll\SciaTools.Kernel.ModelExchangerExtension.Models.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -207,8 +159,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="UnitsNet">
-      <HintPath>..\..\..\SCIA-ENGINEER\TESTING-VERSIONS\Full_19.1.2010.64_rel_19.1_patch_2_x64\OpenAPI_dll\UnitsNet.dll</HintPath>
+    <Reference Include="UnitsNet, Version=3.112.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files\SCIA\Engineer19.1\OpenAPI_dll\UnitsNet.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
@@ -218,6 +171,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
