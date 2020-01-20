@@ -19,7 +19,7 @@
    * SciaTools.Kernel.ModelExchangerExtension.Models.dll located in sub folder OpenAPI_dll in SCIA Engineer install folder
 - Create new / use configuration for x86 / x64 as needed according to SCIA Engineer Architecture
 - write method for resolving of assemblies - see sample code
-```C#
+   ```C#
         private static void SciaOpenApiAssemblyResolve()
         {
             AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
@@ -38,9 +38,9 @@
                 return Assembly.LoadFrom(dllFullPath);
             };
         }
-```
+   ```
 - write method for deliting temp folder
-  ``` C#
+   ``` C#
         private static void DeleteTemp()
         {
 
@@ -49,7 +49,7 @@
             }
 
         }
-```
+   ```
 - Write your application that uses the SCIA.OpenAPI functions documentation of OpenAPI is [here](https://help.scia.net/api/19.1.1023/index.html). In this case you need to create Environment, RunSCIAEngineer and CreateAdmObject for ADM objects
 - For methods and objects of so called ADM - documentation is [here](http://docs.calatrava.scia.net/html/9900284a-b4b6-405e-b157-630e24129caf.htm#!)
 - Methods using OpenAPI have to run in single thread appartment use STAThread 
