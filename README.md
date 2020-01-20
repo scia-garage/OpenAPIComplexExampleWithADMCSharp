@@ -5,18 +5,18 @@
 # To start new C# project in MS Visual Studio to produce app that will use the Scia OpenAPI:
 - create empty C# console application project with .NET 4.6.1
 - Add reference to following dlls and edit properties of references and set Copy Local = False
-      * SCIA.OpenAPI.dll located in SCIA Engineer install folder
-      * ModelExchanger.AnalysisDataModel.dll located in subfolder OpenAPI_dll in SCIA Engineer install folder
-      * ModelExchanger.AnalysisDataModel.Contracts.dll located in sub folder OpenAPI_dll in SCIA Engineer install folder
-      * ModelExchanger.AnalysisDataModel.Implementation.dll located in sub folder OpenAPI_dll in SCIA Engineer install folder
-      * ModelExchanger.Shared.Models.dll located in sub folder OpenAPI_dll in SCIA Engineer install folder
-      * SciaTools.AdmToAdm.AdmSignalR.Models.dll located in sub folder OpenAPI_dll in SCIA Engineer install folder
-      * SciaTools.Kernel.Common.Contracts.dll located in sub folder OpenAPI_dll in SCIA Engineer install folder
-      * SciaTools.Kernel.Common.Implementation.dll located in sub folder OpenAPI_dll in SCIA Engineer install folder
-      * SciaTools.Kernel.Common.Models.dll located in sub folder OpenAPI_dll in SCIA Engineer install folder
-      * SciaTools.Kernel.ModelExchangerExtension.Contracts.dll located in sub folder OpenAPI_dll in SCIA Engineer install folder
-      * SciaTools.Kernel.ModelExchangerExtension.Integration.dll located in sub folder OpenAPI_dll in SCIA Engineer install folder
-      * SciaTools.Kernel.ModelExchangerExtension.Models.dll located in sub folder OpenAPI_dll in SCIA Engineer install folder
+* SCIA.OpenAPI.dll located in SCIA Engineer install folder
+* ModelExchanger.AnalysisDataModel.dll located in subfolder OpenAPI_dll in SCIA Engineer install folder
+* ModelExchanger.AnalysisDataModel.Contracts.dll located in sub folder OpenAPI_dll in SCIA Engineer install folder
+* ModelExchanger.AnalysisDataModel.Implementation.dll located in sub folder OpenAPI_dll in SCIA Engineer install folder
+* ModelExchanger.Shared.Models.dll located in sub folder OpenAPI_dll in SCIA Engineer install folder
+* SciaTools.AdmToAdm.AdmSignalR.Models.dll located in sub folder OpenAPI_dll in SCIA Engineer install folder
+* SciaTools.Kernel.Common.Contracts.dll located in sub folder OpenAPI_dll in SCIA Engineer install folder
+* SciaTools.Kernel.Common.Implementation.dll located in sub folder OpenAPI_dll in SCIA Engineer install folder
+* SciaTools.Kernel.Common.Models.dll located in sub folder OpenAPI_dll in SCIA Engineer install folder
+* SciaTools.Kernel.ModelExchangerExtension.Contracts.dll located in sub folder OpenAPI_dll in SCIA Engineer install folder
+* SciaTools.Kernel.ModelExchangerExtension.Integration.dll located in sub folder OpenAPI_dll in SCIA Engineer install folder
+* SciaTools.Kernel.ModelExchangerExtension.Models.dll located in sub folder OpenAPI_dll in SCIA Engineer install folder
 
 - Create new / use configuration for x86 / x64 as needed according to SCIA Engineer Architecture
 - write method for resolving of assemblies - see sample code
