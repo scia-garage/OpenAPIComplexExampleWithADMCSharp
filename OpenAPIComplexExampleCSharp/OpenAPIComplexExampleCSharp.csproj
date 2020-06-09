@@ -8,7 +8,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>OpenAPIComplexExampleCSharp</RootNamespace>
     <AssemblyName>OpenAPIComplexExampleCSharp</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -89,6 +89,7 @@
     <Reference Include="ModelExchanger.AnalysisDataModel.Contracts, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Program Files\SCIA\Engineer19.1\OpenAPI_dll\ModelExchanger.AnalysisDataModel.Contracts.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ModelExchanger.AnalysisDataModel.Implementation, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

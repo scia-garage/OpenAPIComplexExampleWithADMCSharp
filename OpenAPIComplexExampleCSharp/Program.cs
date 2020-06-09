@@ -25,6 +25,8 @@ using ModelExchanger.AnalysisDataModel.Contracts;
 using SciaTools.Kernel.ModelExchangerExtension.Contracts.AnalysisModelInspection;
 using ModelExchanger.AnalysisDataModel.Implementation.Repositories;
 using SCIA.OpenAPI;
+using SciaTools.Kernel.ModelExchangerExtension.Contracts.Ioc;
+using System.Diagnostics;
 
 namespace OpenAPIAndADMDemo
 {
@@ -83,6 +85,23 @@ namespace OpenAPIAndADMDemo
             }
 
         }
+        private static void KillSCIAEngineerOrphanRuns()
+        {
+
+            foreach (var process in Process.GetProcessesByName("EsaStartupScreen"))
+            {
+                process.Kill();
+                Console.WriteLine($"Kill old EsaStartupScreen!");
+                System.Threading.Thread.Sleep(1000);
+            }
+            foreach (var process in Process.GetProcessesByName("Esa"))
+            {
+                process.Kill();
+                Console.WriteLine($"Kill old SEN!");
+                System.Threading.Thread.Sleep(5000);
+            }
+
+        }
 
         /// <summary>
         /// Assembly resolve method has to be call here
@@ -123,8 +142,8 @@ namespace OpenAPIAndADMDemo
                     throw new InvalidOperationException($"File from manifest resource is not created ! Temp: {env.AppTempPath}");
                 }
 
-                SCIA.OpenAPI.EsaProject proj = env.OpenProject(EsaFile);
-                //SCIA.OpenAPI.EsaProject proj = env.OpenProject(SciaEngineerProjecTemplate);
+                //EsaProject proj = env.OpenProject(EsaFile);
+                EsaProject proj = env.OpenProject(SciaEngineerProjecTemplate);
                 if (proj == null)
                 {
                     return;
@@ -413,14 +432,12 @@ namespace OpenAPIAndADMDemo
             ResultOfPartialAddToAnalysisModel addResult = model.CreateAdmObject(projectInformation, modelInformation);
             if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
 
-            Console.WriteLine($"Set grade for concrete material: ");
-            string conMatGrade = Console.ReadLine();
+            string conMatGrade = "C20/25";
 
             StructuralMaterial concrete = new StructuralMaterial(Guid.NewGuid(), "Concrete", MaterialType.Concrete, conMatGrade);
 
 
-            Console.WriteLine($"Set grade for steel material: ");
-            string steelMatGrade = Console.ReadLine();
+            string steelMatGrade = "S 235";
             StructuralMaterial steel = new StructuralMaterial(Guid.NewGuid(), "Steel", MaterialType.Steel, steelMatGrade);
             addResult = model.CreateAdmObject(concrete, steel);
             if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
@@ -428,29 +445,28 @@ namespace OpenAPIAndADMDemo
             Console.WriteLine($"Materials created in ADM");
 
             //Create cross-sections in local ADM
-            Console.WriteLine($"Set steel profile: ");
-            string steelProfile = Console.ReadLine();
+            string steelProfile = "HEA260";
 
             StructuralCrossSection steelprofile = new StructuralManufacturedCrossSection(Guid.NewGuid(), steelProfile, steel, steelProfile, FormCode.ISection, DescriptionId.EuropeanIBeam);
 
             addResult = model.CreateAdmObject(steelprofile);
             if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
 
-            Console.WriteLine($"Set height of concrete rectangle in mm: ");
-            double heigth = Convert.ToDouble(Console.ReadLine());
-            Console.WriteLine($"Set width of concrete rectangle in mm: ");
-            double width = Convert.ToDouble(Console.ReadLine());
+            
+            double heigth = 600;
+           
+            double width = 300;
             StructuralCrossSection concreteRectangle = new StructuralParametricCrossSection(Guid.NewGuid(), "Concrete", concrete, ProfileLibraryId.Rectangle, new UnitsNet.Length[2] { UnitsNet.Length.FromMillimeters(heigth), UnitsNet.Length.FromMillimeters(width) });
             addResult = model.CreateAdmObject(concreteRectangle);
             if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
             Console.WriteLine($"CSSs created in ADM");
 
-            Console.WriteLine($"Set parameter a: ");
-            double a = Convert.ToDouble(Console.ReadLine());
-            Console.WriteLine($"Set parameter b: ");
-            double b = Convert.ToDouble(Console.ReadLine());
-            Console.WriteLine($"Set parameter c: ");
-            double c = Convert.ToDouble(Console.ReadLine());
+            
+            double a = 4.0;
+           
+            double b = 5.0;
+           
+            double c = 3.0;
 
 
             StructuralPointConnection N1 = new StructuralPointConnection(Guid.NewGuid(), N1Name, UnitsNet.Length.FromMeters(0), UnitsNet.Length.FromMeters(0), UnitsNet.Length.FromMeters(0));
@@ -616,8 +632,8 @@ namespace OpenAPIAndADMDemo
             addResult = model.CreateAdmObject(PS1, PS2, PS3, PS4);
             if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
 
-            Console.WriteLine($"Set thickness of the slab: ");
-            double thickness = Convert.ToDouble(Console.ReadLine());
+            
+            double thickness = 0.3;
             var edgecurves = new Curve<StructuralPointConnection>[4] {
                     new Curve<StructuralPointConnection>(CurveGeometricalShape.Line, new StructuralPointConnection[2] { N5, N6 }),
                     new Curve<StructuralPointConnection>(CurveGeometricalShape.Line, new StructuralPointConnection[2] { N6, N7 }),
@@ -635,10 +651,10 @@ namespace OpenAPIAndADMDemo
             addResult = model.CreateAdmObject(S1);
             if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
 
-            Console.WriteLine($"Set length of opening in slab  in m: ");
-            double lengthOpening = Convert.ToDouble(Console.ReadLine());
-            Console.WriteLine($"Set width of opening in slab  in m: ");
-            double withOpening = Convert.ToDouble(Console.ReadLine());
+           
+            double lengthOpening = 1.0;
+            
+            double withOpening = 1.0;
 
             StructuralPointConnection N9 = new StructuralPointConnection(Guid.NewGuid(), "N9", UnitsNet.Length.FromMeters(0.5 * a - 0.5 * lengthOpening), UnitsNet.Length.FromMeters(0.5 * b - 0.5 * withOpening), UnitsNet.Length.FromMeters(c));
             addResult = model.CreateAdmObject(N9);
@@ -861,13 +877,13 @@ namespace OpenAPIAndADMDemo
             StructuralLoadCase LC1 = new StructuralLoadCase(LC1Id, "LC1", ActionType.Variable, LG1, LoadCaseType.Static)
             {
                 Duration = Duration.Long,
-                Specification = Specification.Standard
+                //Specification = Specification.Standard
             };
             addResult = model.CreateAdmObject(LC1);
             if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
 
             Console.WriteLine($"Set value of line load on  kN/m: ");
-            double lineloadValue = Convert.ToDouble(Console.ReadLine());
+            double lineloadValue = -5.0;
 
 
             StructuralCurveAction<CurveStructuralReferenceOnBeam> lineloadB1 = new StructuralCurveAction<CurveStructuralReferenceOnBeam>(Guid.NewGuid(), "lineLoadB1", CurveForceAction.OnBeam, UnitsNet.ForcePerLength.FromKilonewtonsPerMeter(lineloadValue), LC1, new CurveStructuralReferenceOnBeam(B1))
@@ -919,7 +935,7 @@ namespace OpenAPIAndADMDemo
             StructuralLoadCase LC2 = new StructuralLoadCase(Guid.NewGuid(), "LC2", ActionType.Variable, LG1, LoadCaseType.Static)
             {
                 Duration = Duration.Long,
-                Specification = Specification.Standard
+                //Specification = Specification.Standard
             };
             addResult = model.CreateAdmObject(LC2);
             if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
@@ -927,7 +943,7 @@ namespace OpenAPIAndADMDemo
 
 
             Console.WriteLine($"Set value of surface load on the slab in kN/m^2: ");
-            double surfaceloadValue = Convert.ToDouble(Console.ReadLine());
+            double surfaceloadValue = -7.0;
 
 
             StructuralSurfaceAction sls1 = new StructuralSurfaceAction(Guid.NewGuid(), "sls1", UnitsNet.Pressure.FromKilonewtonsPerSquareMeter(surfaceloadValue), S1, LC2)
@@ -953,7 +969,7 @@ namespace OpenAPIAndADMDemo
             StructuralLoadCase LC3 = new StructuralLoadCase(Guid.NewGuid(), "LC3", ActionType.Variable, LG1, LoadCaseType.Static)
             {
                 Duration = Duration.Long,
-                Specification = Specification.Standard
+                //Specification = Specification.Standard
             };
             addResult = model.CreateAdmObject(LC3);
             if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
@@ -975,13 +991,13 @@ namespace OpenAPIAndADMDemo
             if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
 
             //not yet published
-            //StructuralCurveMoment<CurveStructuralReferenceOnBeam> linemomentloadB4 = new StructuralCurveMoment<CurveStructuralReferenceOnBeam>(Guid.NewGuid(), "linemomentLoadB4", CurveForceAction.OnBeam, UnitsNet.TorquePerLength.FromKilonewtonMetersPerMeter(lineloadValue), LC1, new CurveStructuralReferenceOnBeam(B4))
-            //{
-            //    Direction = MomentDirection.My,
-            //    Distribution = CurveDistribution.Uniform
-            //};
-            //addResult = model.CreateAdmObject(linemomentloadB4);
-            //if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
+            StructuralCurveMoment<CurveStructuralReferenceOnBeam> linemomentloadB4 = new StructuralCurveMoment<CurveStructuralReferenceOnBeam>(Guid.NewGuid(), "linemomentLoadB4", CurveForceAction.OnBeam, UnitsNet.TorquePerLength.FromKilonewtonMetersPerMeter(lineloadValue), LC1, new CurveStructuralReferenceOnBeam(B4))
+            {
+                Direction = MomentDirection.My,
+                Distribution = CurveDistribution.Uniform
+            };
+            addResult = model.CreateAdmObject(linemomentloadB4);
+            if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
 
             var Combinations = new StructuralLoadCombinationData[3] { new StructuralLoadCombinationData(LC1, 1.0, 1.5), new StructuralLoadCombinationData(LC2, 1.0, 1.35), new StructuralLoadCombinationData(LC3, 1.0, 1.35) };
             StructuralLoadCombination C1 = new StructuralLoadCombination(C1Id, "C1", LoadCaseCombinationCategory.AccordingNationalStandard, Combinations)
@@ -1013,18 +1029,20 @@ namespace OpenAPIAndADMDemo
 
         static void Main(string[] args)
         {
+            KillSCIAEngineerOrphanRuns();
             SciaOpenApiAssemblyResolve();
-            
-            DeleteTemp();
-            RunSCIAOpenAPI_simple();
-            
-            //RunOpenAPI_advance();
+
+            //DeleteTemp();
+            //RunSCIAOpenAPI_simple();
+
+            RunOpenAPI_advance();
             //ExcelTest();
         }
 
         private static void RunOpenAPI_advance()
         {
             SciaOpenApiContext Context = new SciaOpenApiContext(SciaEngineerFullPath, SciaOpenApiWorker);//to use this construct you need to have a program exe in SCIA ENG. exe folder
+            Context.SciaEngineerTempFolderImputedByUser = SciaEngineerTempPath;
             SciaOpenApiUtils.RunSciaOpenApi(Context);
             if (Context.Exception != null)
             {
@@ -1108,21 +1126,26 @@ namespace OpenAPIAndADMDemo
             //{
             //    //addResult = model.CreateAdmObject(analysisObject);
             //}
-            
-            
-            //var Repository = bootstrapperADM.Container.Resolve<IAnalysisModelRepository>();
+
+
+
+
+            var Repository = bootstrapperADM.Container.Resolve<IProxyServiceExcel<IAnalysisModelRepository>>().GetServiceProxy();
             //Repository.GetById();
 
-            BootstrapperBase bootstrapperExchanger;
-            bootstrapperExchanger = new BootstrapperBase();
-            bootstrapperExchanger.Boostrapp<ModelExchangerExtensionIntegrationModule>();
-            ExchangeResult result = bootstrapperExchanger.Container.Resolve<ICoreToExcelFileService>().WriteExcel(ModelHolder.AnalysisModel, @"C:/TEMP/A.xls");
+            //var Repository =  bootstrapperADM.Container.Resolve<IAnalysisModelInspector>();
 
-            ExchangeCoreResult readedExcelModel =  bootstrapperExchanger.Container.Resolve<IExcelToCoreFileService>().ReadExcel(@"C:/TEMP/A.xls");
+
+            //BootstrapperBase bootstrapperExchanger;
+            //bootstrapperExchanger = new BootstrapperBase();
+            //bootstrapperExchanger.Boostrapp<ModelExchangerExtensionIntegrationModule>();
+            ExchangeResult result = bootstrapperADM.Container.Resolve<ICoreToExcelFileService>().WriteExcel(ModelHolder.AnalysisModel, @"C:/TEMP/A.xls");
+
+            ExchangeCoreResult readedExcelModel = bootstrapperADM.Container.Resolve<IExcelToCoreFileService>().ReadExcel(@"C:/TEMP/A.xls");
             //readedExcelModel.Model.IsModelValid
 
-            result =  bootstrapperExchanger.Container.Resolve<ICoreToJsonFileService>().WriteJson(ModelHolder.AnalysisModel, @"C:/TEMP/A.json");
-            ExchangeCoreResult readedJsonModel =  bootstrapperExchanger.Container.Resolve<IJsonToCoreFileService>().ReadJson(@"C:/TEMP/A.json");
+            result = bootstrapperADM.Container.Resolve<ICoreToJsonFileService>().WriteJson(ModelHolder.AnalysisModel, @"C:/TEMP/A.json");
+            ExchangeCoreResult readedJsonModel = bootstrapperADM.Container.Resolve<IJsonToCoreFileService>().ReadJson(@"C:/TEMP/A.json");
 
         
         }
