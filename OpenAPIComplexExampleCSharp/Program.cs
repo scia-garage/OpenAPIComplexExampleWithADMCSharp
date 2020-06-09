@@ -308,98 +308,224 @@ namespace OpenAPIAndADMDemo
             OpenApiE2EResults storage = new OpenApiE2EResults();
 
             //Initialize Results API
-            ResultsAPI resultsApi = proj.Model.InitializeResultsAPI();
-            if (resultsApi == null)
+            using (ResultsAPI resultsApi = proj.Model.InitializeResultsAPI())
             {
+                if (resultsApi == null)
+                {
+                    return storage;
+                }
+                {
+                    OpenApiE2EResult beamB1InnerForLc = new OpenApiE2EResult("beamB1InnerForcesLC1")
+                    {
+                        ResultKey = new ResultKey
+                        {
+                            EntityType = eDsElementType.eDsElementType_Beam,
+                            EntityName = B1Name,
+                            CaseType = eDsElementType.eDsElementType_LoadCase,
+                            CaseId = LC1Id,
+                            Dimension = eDimension.eDim_1D,
+                            ResultType = eResultType.eFemBeamInnerForces,
+                            CoordSystem = eCoordSystem.eCoordSys_Local
+                        }
+                    };
+                    beamB1InnerForLc.Result = resultsApi.LoadResult(beamB1InnerForLc.ResultKey);
+                    storage.SetResult(beamB1InnerForLc);
+                }
+                {
+                    OpenApiE2EResult beamB1IDeformationLc = new OpenApiE2EResult("beamB1DeformationsLC1")
+                    {
+                        ResultKey = new ResultKey
+                        {
+                            EntityType = eDsElementType.eDsElementType_Beam,
+                            EntityName = B1Name,
+                            CaseType = eDsElementType.eDsElementType_LoadCase,
+                            CaseId = LC1Id,
+                            Dimension = eDimension.eDim_1D,
+                            ResultType = eResultType.eFemBeamDeformation,
+                            CoordSystem = eCoordSystem.eCoordSys_Local
+                        }
+                    };
+                    beamB1IDeformationLc.Result = resultsApi.LoadResult(beamB1IDeformationLc.ResultKey);
+                    storage.SetResult(beamB1IDeformationLc);
+                }
+                {
+                    OpenApiE2EResult beamB1RelIDeformationLc = new OpenApiE2EResult("beamB1RelativeDeformationsLC1")
+                    {
+                        ResultKey = new ResultKey
+                        {
+                            EntityType = eDsElementType.eDsElementType_Beam,
+                            EntityName = B1Name,
+                            CaseType = eDsElementType.eDsElementType_LoadCase,
+                            CaseId = LC1Id,
+                            Dimension = eDimension.eDim_1D,
+                            ResultType = eResultType.eFemBeamRelativeDeformation,
+                            CoordSystem = eCoordSystem.eCoordSys_Local
+                        }
+                    };
+                    beamB1RelIDeformationLc.Result = resultsApi.LoadResult(beamB1RelIDeformationLc.ResultKey);
+                    storage.SetResult(beamB1RelIDeformationLc);
+                }
+                //{
+                //    OpenApiE2EResult beamInnerForcesCombi = new OpenApiE2EResult("beamInnerForcesCombi")
+                //    {
+                //        ResultKey = new ResultKey
+                //        {
+                //            EntityType = eDsElementType.eDsElementType_Beam,
+                //            EntityName = B1Name,
+                //            CaseType = eDsElementType.eDsElementType_Combination,
+                //            CaseId = C1Id,
+                //            Dimension = eDimension.eDim_1D,
+                //            ResultType = eResultType.eFemBeamInnerForces,
+                //            CoordSystem = eCoordSystem.eCoordSys_Local
+                //        }
+                //    };
+                //    beamInnerForcesCombi.Result = resultsApi.LoadResult(beamInnerForcesCombi.ResultKey);
+                //    storage.SetResult(beamInnerForcesCombi);
+                //}
+
+
+                {
+                    OpenApiE2EResult slabInnerForces = new OpenApiE2EResult("slabInnerForces")
+                    {
+                        ResultKey = new ResultKey
+                        {
+                            EntityType = eDsElementType.eDsElementType_Slab,
+                            EntityName = S1Name,
+                            CaseType = eDsElementType.eDsElementType_LoadCase,
+                            CaseId = LC1Id,
+                            Dimension = eDimension.eDim_2D,
+                            ResultType = eResultType.eFemInnerForces,
+                            CoordSystem = eCoordSystem.eCoordSys_Local
+                        }
+                    };
+                    slabInnerForces.Result = resultsApi.LoadResult(slabInnerForces.ResultKey);
+                    storage.SetResult(slabInnerForces);
+                }
+                {
+                    OpenApiE2EResult slabDeformations = new OpenApiE2EResult("slabDeformations")
+                    {
+                        ResultKey = new ResultKey
+                        {
+                            EntityType = eDsElementType.eDsElementType_Slab,
+                            EntityName = S1Name,
+                            CaseType = eDsElementType.eDsElementType_LoadCase,
+                            CaseId = LC1Id,
+                            Dimension = eDimension.eDim_2D,
+                            ResultType = eResultType.eFemDeformations,
+                            CoordSystem = eCoordSystem.eCoordSys_Local
+                        }
+                    };
+                    slabDeformations.Result = resultsApi.LoadResult(slabDeformations.ResultKey);
+                    storage.SetResult(slabDeformations);
+                }
+                {
+                    OpenApiE2EResult slabStresses = new OpenApiE2EResult("slabStresses")
+                    {
+                        ResultKey = new ResultKey
+                        {
+                            EntityType = eDsElementType.eDsElementType_Slab,
+                            EntityName = S1Name,
+                            CaseType = eDsElementType.eDsElementType_LoadCase,
+                            CaseId = LC1Id,
+                            Dimension = eDimension.eDim_2D,
+                            ResultType = eResultType.eFemStress,
+                            CoordSystem = eCoordSystem.eCoordSys_Local
+                        }
+                    };
+                    slabStresses.Result = resultsApi.LoadResult(slabStresses.ResultKey);
+                    storage.SetResult(slabStresses);
+                }
+                {
+                    OpenApiE2EResult slabStrains = new OpenApiE2EResult("slabStrains")
+                    {
+                        ResultKey = new ResultKey
+                        {
+                            EntityType = eDsElementType.eDsElementType_Slab,
+                            EntityName = S1Name,
+                            CaseType = eDsElementType.eDsElementType_LoadCase,
+                            CaseId = LC1Id,
+                            Dimension = eDimension.eDim_2D,
+                            ResultType = eResultType.eFemStrains,
+                            CoordSystem = eCoordSystem.eCoordSys_Local
+                        }
+                    };
+                    slabStrains.Result = resultsApi.LoadResult(slabStrains.ResultKey);
+                    storage.SetResult(slabStrains);
+                }
+                {
+                    OpenApiE2EResult slabInnerForcesExtended = new OpenApiE2EResult("slabInnerForcesExtended")
+                    {
+                        ResultKey = new ResultKey
+                        {
+                            EntityType = eDsElementType.eDsElementType_Slab,
+                            EntityName = S1Name,
+                            CaseType = eDsElementType.eDsElementType_LoadCase,
+                            CaseId = LC1Id,
+                            Dimension = eDimension.eDim_2D,
+                            ResultType = eResultType.eFemInnerForces_Extended,
+                            CoordSystem = eCoordSystem.eCoordSys_Local
+                        }
+                    };
+                    slabInnerForcesExtended.Result = resultsApi.LoadResult(slabInnerForcesExtended.ResultKey);
+                    storage.SetResult(slabInnerForcesExtended);
+                }
+
+                //{
+                //    OpenApiE2EResult reactions = new OpenApiE2EResult("ReactionsN1")
+                //    {
+                //        ResultKey = new ResultKey
+                //        {
+                //            CaseType = eDsElementType.eDsElementType_LoadCase,
+                //            CaseId = Lc1Id,
+                //            EntityType = eDsElementType.eDsElementType_Node,
+                //            EntityName = "n1",
+                //            Dimension = eDimension.eDim_reactionsPoint,
+                //            ResultType = eResultType.eReactionsNodes,
+                //            CoordSystem = eCoordSystem.eCoordSys_Global
+                //        }
+                //    };
+                //    reactions.Result = resultsApi.LoadResult(reactions.ResultKey);
+                //    storage.SetResult(reactions);
+                //}
+                //{
+                //    OpenApiE2EResult reactions = new OpenApiE2EResult("ReactionsSu1")
+                //    {
+                //        ResultKey = new ResultKey
+                //        {
+                //            CaseType = eDsElementType.eDsElementType_LoadCase,
+                //            CaseId = Lc1Id,
+                //            EntityType = eDsElementType.eDsElementType_PointSupportPoint,
+                //            EntityName = "Su1",
+                //            Dimension = eDimension.eDim_reactionsPoint,
+                //            ResultType = eResultType.eResultTypeReactionsSupport0D,
+                //            CoordSystem = eCoordSystem.eCoordSys_Global,
+
+                //        }
+                //    };
+                //    reactions.Result = resultsApi.LoadResult(reactions.ResultKey);
+                //    storage.SetResult(reactions);
+                //}
+                //{
+                //    OpenApiE2EResult ReactionslinSupBeam = new OpenApiE2EResult("ReactionslinSupBeam")
+                //    {
+                //        ResultKey = new ResultKey
+                //        {
+                //            EntityType = eDsElementType.eDsElementType_LineSupportLine,
+                //            EntityName = "linSupBeam",
+                //            Dimension = eDimension.eDim_reactionsLine,
+                //            CoordSystem = eCoordSystem.eCoordSys_Global,
+                //            CaseType = eDsElementType.eDsElementType_LoadCase,
+                //            CaseId = Lc1Id,
+                //            ResultType = eResultType.eResultTypeReactionsSupport1D,
+
+                //        }
+                //    };
+                //    ReactionslinSupBeam.Result = resultsApi.LoadResult(ReactionslinSupBeam.ResultKey);
+                //    storage.SetResult(ReactionslinSupBeam);
+                //}             
+
                 return storage;
             }
-            {
-                OpenApiE2EResult beamB1InnerForLc = new OpenApiE2EResult("beamB1InnerForcesLC1")
-                {
-                    ResultKey = new ResultKey
-                    {
-                        EntityType = eDsElementType.eDsElementType_Beam,
-                        EntityName = B1Name,
-                        CaseType = eDsElementType.eDsElementType_LoadCase,
-                        CaseId = LC1Id,
-                        Dimension = eDimension.eDim_1D,
-                        ResultType = eResultType.eFemBeamInnerForces,
-                        CoordSystem = eCoordSystem.eCoordSys_Local
-                    }
-                };
-                beamB1InnerForLc.Result = resultsApi.LoadResult(beamB1InnerForLc.ResultKey);
-                storage.SetResult(beamB1InnerForLc);
-            }
-            {
-               OpenApiE2EResult beamInnerForcesCombi = new OpenApiE2EResult("beamInnerForcesCombi")
-                {
-                   ResultKey = new ResultKey
-                   {
-                        EntityType = eDsElementType.eDsElementType_Beam,
-                        EntityName = B1Name,
-                        CaseType = eDsElementType.eDsElementType_Combination,
-                        CaseId = C1Id,
-                        Dimension = eDimension.eDim_1D,
-                        ResultType = eResultType.eFemBeamInnerForces,
-                        CoordSystem = eCoordSystem.eCoordSys_Local
-                   }
-                };
-                beamInnerForcesCombi.Result = resultsApi.LoadResult(beamInnerForcesCombi.ResultKey);
-                storage.SetResult(beamInnerForcesCombi);
-            }
-            {
-                OpenApiE2EResult slabInnerForces = new OpenApiE2EResult("slabInnerForces")
-                {
-                    ResultKey = new ResultKey
-                    {
-                        EntityType = eDsElementType.eDsElementType_Slab,
-                        EntityName = S1Name,
-                        CaseType = eDsElementType.eDsElementType_LoadCase,
-                        CaseId = LC1Id,
-                        Dimension = eDimension.eDim_2D,
-                        ResultType = eResultType.eFemInnerForces,
-                        CoordSystem = eCoordSystem.eCoordSys_Local
-                    }
-                };
-                slabInnerForces.Result = resultsApi.LoadResult(slabInnerForces.ResultKey);
-                storage.SetResult(slabInnerForces);
-            }
-            {
-                OpenApiE2EResult slabDeformations = new OpenApiE2EResult("slabDeformations")
-                {
-                    ResultKey = new ResultKey
-                    {
-                        EntityType = eDsElementType.eDsElementType_Slab,
-                        EntityName = S1Name,
-                        CaseType = eDsElementType.eDsElementType_LoadCase,
-                        CaseId = LC1Id,
-                        Dimension = eDimension.eDim_2D,
-                        ResultType = eResultType.eFemDeformations,
-                        CoordSystem = eCoordSystem.eCoordSys_Local
-                    }
-                };
-                slabDeformations.Result = resultsApi.LoadResult(slabDeformations.ResultKey);
-                storage.SetResult(slabDeformations);
-            }
-            {
-                OpenApiE2EResult reactions = new OpenApiE2EResult("Reactions")
-                {
-                    ResultKey = new ResultKey
-                    {
-                        CaseType = eDsElementType.eDsElementType_LoadCase,
-                        CaseId = LC1Id,
-                        EntityType = eDsElementType.eDsElementType_Node,
-                        EntityName = N1Name,
-                        Dimension = eDimension.eDim_reactionsPoint,
-                        ResultType = eResultType.eReactionsNodes,
-                        CoordSystem = eCoordSystem.eCoordSys_Global
-                    }
-                };
-                reactions.Result = resultsApi.LoadResult(reactions.ResultKey);
-                storage.SetResult(reactions);
-            }
-           // proj.CloseProject(SCIA.OpenAPI.SaveMode.SaveChangesNo);
-            return storage;
         }
 
         private static void CreateModel(Structure model)
@@ -882,7 +1008,7 @@ namespace OpenAPIAndADMDemo
             addResult = model.CreateAdmObject(LC1);
             if (addResult.PartialAddResult.Status != AdmChangeStatus.Ok) { throw HandleErrorResult(addResult); }
 
-            Console.WriteLine($"Set value of line load on  kN/m: ");
+            
             double lineloadValue = -5.0;
 
 
@@ -942,7 +1068,7 @@ namespace OpenAPIAndADMDemo
 
 
 
-            Console.WriteLine($"Set value of surface load on the slab in kN/m^2: ");
+           
             double surfaceloadValue = -7.0;
 
 
@@ -1041,7 +1167,7 @@ namespace OpenAPIAndADMDemo
 
         private static void RunOpenAPI_advance()
         {
-            SciaOpenApiContext Context = new SciaOpenApiContext(SciaEngineerFullPath, SciaOpenApiWorker);//to use this construct you need to have a program exe in SCIA ENG. exe folder
+            SciaOpenApiContext Context = new SciaOpenApiContext(SciaEngineerFullPath, SciaOpenApiWorker);
             Context.SciaEngineerTempFolderImputedByUser = SciaEngineerTempPath;
             SciaOpenApiUtils.RunSciaOpenApi(Context);
             if (Context.Exception != null)
@@ -1054,10 +1180,10 @@ namespace OpenAPIAndADMDemo
                 Console.WriteLine("SOMETHING IS WRONG NO Results DATA !");
                 return;
             }
-            //foreach (var item in data.GetAll())
-            //{
-            //    Console.WriteLine(item.Value.Result.GetTextOutput());
-            //}
+            foreach (var item in data.GetAll())
+            {
+                Console.WriteLine(item.Value.Result.GetTextOutput());
+            }
             var slabDef = data.GetResult("slabDeformations").Result;
             if (slabDef != null)
             {
