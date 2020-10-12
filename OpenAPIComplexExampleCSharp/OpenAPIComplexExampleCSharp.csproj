@@ -78,68 +78,68 @@
   <ItemGroup>
     <Reference Include="CSInfrastructure, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files\SCIA\Engineer19.1\OpenAPI_dll\CSInfrastructure.dll</HintPath>
+      <HintPath>..\..\..\..\Program Files\SCIA\Engineer20.0\OpenAPI_dll\CSInfrastructure.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ModelExchanger.AnalysisDataModel, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files\SCIA\Engineer19.1\OpenAPI_dll\ModelExchanger.AnalysisDataModel.dll</HintPath>
+      <HintPath>..\..\..\..\Program Files\SCIA\Engineer20.0\OpenAPI_dll\ModelExchanger.AnalysisDataModel.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ModelExchanger.AnalysisDataModel.Contracts, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files\SCIA\Engineer19.1\OpenAPI_dll\ModelExchanger.AnalysisDataModel.Contracts.dll</HintPath>
+      <HintPath>..\..\..\..\Program Files\SCIA\Engineer20.0\OpenAPI_dll\ModelExchanger.AnalysisDataModel.Contracts.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ModelExchanger.AnalysisDataModel.Implementation, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files\SCIA\Engineer19.1\OpenAPI_dll\ModelExchanger.AnalysisDataModel.Implementation.dll</HintPath>
+      <HintPath>..\..\..\..\Program Files\SCIA\Engineer20.0\OpenAPI_dll\ModelExchanger.AnalysisDataModel.Implementation.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ModelExchanger.Shared.Models, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files\SCIA\Engineer19.1\OpenAPI_dll\ModelExchanger.Shared.Models.dll</HintPath>
+      <HintPath>..\..\..\..\Program Files\SCIA\Engineer20.0\OpenAPI_dll\ModelExchanger.Shared.Models.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="SCIA.OpenAPI, Version=19.1.2010.64, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files\SCIA\Engineer19.1\OpenAPI_dll\SCIA.OpenAPI.dll</HintPath>
+      <HintPath>..\..\..\..\Program Files\SCIA\Engineer20.0\OpenAPI_dll\SCIA.OpenAPI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="SciaTools.AdmToAdm.AdmSignalR.Models, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files\SCIA\Engineer19.1\OpenAPI_dll\SciaTools.AdmToAdm.AdmSignalR.Models.dll</HintPath>
+      <HintPath>..\..\..\..\Program Files\SCIA\Engineer20.0\OpenAPI_dll\SciaTools.AdmToAdm.AdmSignalR.Models.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="SciaTools.Kernel.Common.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files\SCIA\Engineer19.1\OpenAPI_dll\SciaTools.Kernel.Common.Contracts.dll</HintPath>
+      <HintPath>..\..\..\..\Program Files\SCIA\Engineer20.0\OpenAPI_dll\SciaTools.Kernel.Common.Contracts.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="SciaTools.Kernel.Common.Implementation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files\SCIA\Engineer19.1\OpenAPI_dll\SciaTools.Kernel.Common.Implementation.dll</HintPath>
+      <HintPath>..\..\..\..\Program Files\SCIA\Engineer20.0\OpenAPI_dll\SciaTools.Kernel.Common.Implementation.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="SciaTools.Kernel.Common.Models, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files\SCIA\Engineer19.1\OpenAPI_dll\SciaTools.Kernel.Common.Models.dll</HintPath>
+      <HintPath>..\..\..\..\Program Files\SCIA\Engineer20.0\OpenAPI_dll\SciaTools.Kernel.Common.Models.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="SciaTools.Kernel.ModelExchangerExtension.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files\SCIA\Engineer19.1\OpenAPI_dll\SciaTools.Kernel.ModelExchangerExtension.Contracts.dll</HintPath>
+      <HintPath>..\..\..\..\Program Files\SCIA\Engineer20.0\OpenAPI_dll\SciaTools.Kernel.ModelExchangerExtension.Contracts.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="SciaTools.Kernel.ModelExchangerExtension.Integration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files\SCIA\Engineer19.1\OpenAPI_dll\SciaTools.Kernel.ModelExchangerExtension.Integration.dll</HintPath>
+      <HintPath>..\..\..\..\Program Files\SCIA\Engineer20.0\OpenAPI_dll\SciaTools.Kernel.ModelExchangerExtension.Integration.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="SciaTools.Kernel.ModelExchangerExtension.Models, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files\SCIA\Engineer19.1\OpenAPI_dll\SciaTools.Kernel.ModelExchangerExtension.Models.dll</HintPath>
+      <HintPath>..\..\..\..\Program Files\SCIA\Engineer20.0\OpenAPI_dll\SciaTools.Kernel.ModelExchangerExtension.Models.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -162,7 +162,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="UnitsNet, Version=3.112.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files\SCIA\Engineer19.1\OpenAPI_dll\UnitsNet.dll</HintPath>
+      <HintPath>..\..\..\..\Program Files\SCIA\Engineer20.0\OpenAPI_dll\UnitsNet.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>

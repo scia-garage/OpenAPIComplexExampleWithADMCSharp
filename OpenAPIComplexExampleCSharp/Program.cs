@@ -20,9 +20,6 @@ using SciaTools.Kernel.ModelExchangerExtension.Integration.Modules;
 using SciaTools.Kernel.ModelExchangerExtension.Contracts.AnalysisModelModifications;
 using SciaTools.Kernel.ModelExchangerExtension.Models.AnalysisModelModifications;
 using SciaTools.Kernel.ModelExchangerExtension.Contracts.Services;
-using ModelExchanger.AnalysisDataModel.Models;
-using ModelExchanger.AnalysisDataModel.Contracts;
-using SciaTools.Kernel.ModelExchangerExtension.Contracts.AnalysisModelInspection;
 using ModelExchanger.AnalysisDataModel.Implementation.Repositories;
 using SCIA.OpenAPI;
 using SciaTools.Kernel.ModelExchangerExtension.Contracts.Ioc;
@@ -42,7 +39,7 @@ namespace OpenAPIAndADMDemo
         {
             //var directory = new DirectoryInfo(Environment.CurrentDirectory);
             //return directory.Parent.FullName;
-            return @"C:\Program Files\SCIA\Engineer19.1\"; // SEn application installation folder, don't forget run "esa.exe /regserver" from commandline with Admin rights
+            return @"C:\Program Files\SCIA\Engineer20.0\"; // SEn application installation folder, don't forget run "esa.exe /regserver" from commandline with Admin rights
         }
 
         /// <summary>
@@ -58,7 +55,7 @@ namespace OpenAPIAndADMDemo
 
         private static string GetTempPath()
         {
-            return @"C:\Users\jbroz\ESA19.1\Temp\"; // Must be SEn application temp path, run SEn and go to menu: Setup -> Options -> Directories -> Temporary files
+            return @"C:\Users\jbroz\ESA20.0\Temp\"; // Must be SEn application temp path, run SEn and go to menu: Setup -> Options -> Directories -> Temporary files
         }
 
         static private string SciaEngineerProjecTemplate => GetTemplatePath();
