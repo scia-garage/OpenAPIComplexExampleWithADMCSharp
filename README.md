@@ -51,7 +51,7 @@
         }
    ```
 - Write your application that uses the SCIA.OpenAPI functions documentation of OpenAPI is [here](https://help.scia.net/api/19.1.1023/index.html). In this case you need to create Environment, RunSCIAEngineer and CreateAdmObject for ADM objects
-- For methods and objects of so called ADM - documentation is [here](http://docs.calatrava.scia.net/html/9900284a-b4b6-405e-b157-630e24129caf.htm#!)
+- For methods and objects of so called ADM - documentation is [here](http://docs.calatrava.scia.net/html/9900284a-b4b6-405e-b157-630e24129caf.htm)
 - Methods using OpenAPI have to run in single thread appartment use STAThread 
 - Don't forget to use "using" statement for environment object creation OR call the Environment's Dispose() method when you finish your work with SCIA OpenAPI
 
